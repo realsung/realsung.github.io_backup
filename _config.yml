@@ -1,7 +1,7 @@
 # Site settings
 title:          realsung
 description:    "Hi :)"
-baseurl:        "/realsung"
+baseurl:        ""
 url:            "https://realsung.github.io"
 
 # Google Analytics
