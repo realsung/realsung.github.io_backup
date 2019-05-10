@@ -1,7 +1,8 @@
 ---
-layout: page
+layout: post
+title: "About"
+author: "realsung"
 permalink: /about/
-title: About Me
 ---
 
 <h1>realsung</h1>
@@ -12,13 +13,11 @@ title: About Me
 - __Contact__ : sungjun0208@naver.com
 - __Skills__ : Develop, Analysis
 
-<br>
-
 <h1>History</h1>
 
 - __2017.8__  : Gold Prize, Software Olympiad
 - __2018.3 __ : Entrance Sunrin Internet High School
-- __2018.3 :__ Join the programming club Unifox
+- __2018.3 :__  Join the programming club Unifox
 - **2018.4.5 :** Participate in Codegate 2018 Conference
 - **2018.9.1~2 :** 1th place, 18th Hackingcamp
 - **2018.11.8~9 :** Participate in POC(Power of Community)
