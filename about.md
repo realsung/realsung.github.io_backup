@@ -14,7 +14,7 @@ permalink: /about/
 <h1>History</h1>
 
 - __2017.8__  : Gold Prize, Software Olympiad
-- __2018.3 __ : Entrance Sunrin Internet High School
+- __2018.3__ : Entrance Sunrin Internet High School
 - __2018.3__ :  Join the programming club Unifox
 - **2018.4.5 :** Participate in Codegate 2018 Conference
 - **2018.9.1~2 :** 1th place, 18th Hackingcamp
