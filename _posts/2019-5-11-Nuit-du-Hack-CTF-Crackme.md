@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Nuit du Hack CTF Quals 2016 Matriochka
+title: 2016 Nuit du Hack CTF Quals Matriochka
 author: "Realsung"
 comments: true
 featured: true
