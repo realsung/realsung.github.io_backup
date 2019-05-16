@@ -24,6 +24,7 @@ permalink: /about/
 - **2019.3.26 :** Codegate 2019 Final 
 - **2019.3.27 :** Participate in Codegate 2018 Conference
 
-
+* **2019.5.2 :** Lecture about School hacking Contest 
+* **2019.5.9** : Silver Prize, In-School Hacking Contest
 
 <br>
