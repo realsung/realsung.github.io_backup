@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2016 hackcon angry reverse 
+title: 2016 Hackcon angry reverse 
 author: "Realsung"
 comments: true
 featured: true
