@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: http://realsung.github.io/sitemap.xml
+Sitemap: https://realsung.github.io/sitemap.xml
