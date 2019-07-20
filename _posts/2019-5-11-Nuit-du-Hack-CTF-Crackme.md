@@ -4,6 +4,9 @@ title: 2016 Nuit du Hack CTF Quals Matriochka
 author: "Realsung"
 comments: true
 featured: true
+sitemap :
+  changefreq : nuitduhackctf
+  priority : 1.0
 ---
 
 ## Stage1

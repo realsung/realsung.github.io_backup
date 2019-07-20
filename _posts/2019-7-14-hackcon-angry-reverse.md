@@ -4,6 +4,9 @@ title: 2016 Hackcon CTF angry reverse
 author: "Realsung"
 comments: true
 featured: true
+sitemap :
+  changefreq : hackconctf
+  priority : 1.0
 ---
 
 `400646: function frame is wrong` 헥스레이할 때 이렇게 오류 나는데 Undefine(U)해주고 Create Function(P) 해주면 된다.

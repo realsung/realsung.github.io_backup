@@ -4,6 +4,9 @@ title: 2018 Pico CTF Writeup
 author: "Realsung"
 comments: true
 featured: true
+sitemap :
+  changefreq : 2018picoctf
+  priority : 1.0
 ---
 
 > NickName : ind3x

@@ -4,6 +4,9 @@ title: CTF Tips
 author: "Realsung"
 comments: true
 featured: true
+sitemap :
+  changefreq : ctftips
+  priority : 1.0
 ---
 
 #### 물론 제 경험상 작성.. 계속 작성해나갈듯

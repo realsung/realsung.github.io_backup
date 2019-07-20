@@ -4,6 +4,9 @@ title: 2019 Codegate Quals Writeup
 author: "Realsung"
 comments: true
 featured: true
+sitemap :
+  changefreq : 2019codegatequals
+  priority : 1.0
 ---
 
 > 팀명 : 앙진헌띠

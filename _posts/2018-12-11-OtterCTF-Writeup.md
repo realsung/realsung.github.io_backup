@@ -4,6 +4,9 @@ title: 2018 Otter CTF Writeup
 author: "Realsung"
 comments: true
 featured: true
+sitemap :
+  changefreq : 2018otterctf
+  priority : 1.0
 ---
 
 ### 1 - What the password? - 100pt

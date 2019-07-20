@@ -4,6 +4,9 @@ title: 2019 Tamu CTF Writeup
 author: "Realsung"
 comments: true
 featured: true
+sitemap :
+  changefreq : 2019tamuctf
+  priority : 1.0
 ---
 
 ######2472팀중에 348등 5061 points로 끝냈고 22문제를 풀었다.

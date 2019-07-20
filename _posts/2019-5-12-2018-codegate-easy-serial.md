@@ -4,6 +4,9 @@ title: 2018 Codegate Prequal easy serial
 author: "Realsung"
 comments: true
 featured: true
+sitemap :
+  changefreq : codegateeasyserial
+  priority : 1.0
 ---
 
 ```
