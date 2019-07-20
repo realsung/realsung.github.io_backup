@@ -37,3 +37,25 @@ sitemap :
   binsh = libc_base
   binsh += e.search('/bin/sh').next()
   ```
+
+
+
+# Python Tips
+
+XOR Tip
+
+두 개의 문자 xor연산 할 때 itertools cycle 모듈 사용해서 인덱스가 끝나도 처음으로 가서 계속 xor 연산 가능
+
+zip 함수는 두 개의 리스트의 같은 인덱스를 짝 지어준다.
+
+Ex) [1,2] [3,4] 있으면 (1,3) (2,4) 이런식으로
+
+```python
+from itertools import cycle
+a="Eo@GxVoclNqioF^tkF^clNqyoFe}"
+b="\x03#\x01\x00"
+flag=""
+for x,y in zip(a,cycle(b)):
+	flag += chr(ord(x)^ord(y))
+print flag
+```
