@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2016 Hackcon angry reverse 
+title: 2016 Hackcon CTF angry reverse 
 author: "Realsung"
 comments: true
 featured: true
