@@ -2,7 +2,7 @@
 title:          realsung
 description:    "Hi :)"
 baseurl:        ""
-url:            "https://realsung.github.io"
+url:            "http://realsung.github.io"
 
 # Google Analytics
 google_analytics: UA-125826027-1
