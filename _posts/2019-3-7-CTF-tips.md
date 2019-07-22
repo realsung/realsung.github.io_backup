@@ -181,9 +181,7 @@ IF(substr(lpad(bin(ord(substr(password,1,1))),8,0),1,1)
 String Filtering [ preg_match - ex) admin]
 
 ```php
-admin : 0x61646d696e 
-  			0b0110000101100100011011010110100101101110 
-  			char(0x61, 0x64, 0x6d, 0x69, 0x6e)
+admin : 0x61646d696e 0b0110000101100100011011010110100101101110 char(0x61, 0x64, 0x6d, 0x69, 0x6e)
 ```
 
 <br />
@@ -219,9 +217,7 @@ FRONT %00 INSERT -> 뒤에 문자 필터링 처리 안됨
 replace, replaceAll, str_replace
 
 ```php
-'admin' Filtering -> 'adadminmin'
-										 'admadminin'
-										 'admdmiadmdmiinin'
+'admin' Filtering -> 'adadminmin' 'admadminin' 'admdmiadmdmiinin'
 ```
 
 <br />
