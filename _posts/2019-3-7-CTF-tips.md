@@ -79,7 +79,7 @@ printf("%LENGTH$n"); -> printf("%12$n");
 
 # Python Tips
 
-> XOR
+> xor
 
 두 개의 문자 xor연산 할 때 itertools cycle 모듈 사용해서 인덱스가 끝나도 처음으로 가서 계속 xor 연산 가능
 
@@ -95,6 +95,19 @@ flag=""
 for x,y in zip(a,cycle(b)):
 	flag += chr(ord(x)^ord(y))
 print flag
+```
+
+<br />
+
+> ctypes
+
+아래 예제처럼 응용
+
+```python
+from ctypes import CDLL
+libc = CDLL("/lib/x86_64-linux-gnu/libc.so.6") # Windows -> msvcrt
+libc.srand(libc.time(0))
+libc.rand()
 ```
 
 <br />
