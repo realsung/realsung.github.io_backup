@@ -13,7 +13,7 @@ ARM Reversing 문제 풀기 위해 좀 정리하려고 한다.
 
 <br />
 
-### Register
+##Register
 
 ```
 R0 ~ R12 : 범용 레지스터 (다목적 레지스터)
@@ -27,7 +27,7 @@ R15(PC) : 프로그램 카운터 : 현재 fetch되고 있는 명령어의 주소
 
 <br />
 
-### CSPR Register
+##CSPR Register
 
 CSPR(Current Program Status Register)
 
@@ -44,7 +44,7 @@ V(oVerflow) : 오버플로우 플래그 (연산 결과가 오버플로우 난 �
 
 <br />
 
-### Instruction
+##Instruction
 
 ```asm
 형식
@@ -61,7 +61,7 @@ ex) ADD r0, r1, r2 ; r0 = r1 + r2
 
 <br />
 
-### 접미사
+##접미사
 
 ```assembly
 EQ	: Z Set				                equal
@@ -79,7 +79,7 @@ ex) ADDEQ r0, r1, r2 ; if(ZF) r0 = r1 + r2 -> if(r0 == r1+r2){ }
 
 <br />
 
-# Function Calling
+##Function Calling
 
 ```
 1) 프롤로그 (서브루틴을 호출하기 직전)에 r4 부터 r11 까지 스택에 저장(push)하고 r14(리턴어드레스)를 스택에 저장(push)한다.
