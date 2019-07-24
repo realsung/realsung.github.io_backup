@@ -46,7 +46,7 @@ V(oVerflow) : 오버플로우 플래그 (연산 결과가 오버플로우 난 �
 
 ## Instruction
 
-```asm
+```
 형식
 <Operation>{<cond>}{S} Rd, Rn, Op2
 - Operation : 명령어
@@ -63,7 +63,7 @@ ex) ADD r0, r1, r2 ; r0 = r1 + r2
 
 ## 접미사
 
-```assembly
+```
 EQ	: Z Set				                equal
 NE	: Z Clear			                not equal
 GE	: N equal V			              greater or equal
