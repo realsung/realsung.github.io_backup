@@ -47,8 +47,7 @@ V(oVerflow) : 오버플로우 플래그 (연산 결과가 오버플로우 난 �
 ## Instruction
 
 ```
-형식
-<Operation>{<cond>}{S} Rd, Rn, Op2
+형식 : <Operation>{<cond>}{S} Rd, Rn, Op2
 - Operation : 명령어
 - cond : 접미사
 - S : CSPR Setting
@@ -64,12 +63,12 @@ ex) ADD r0, r1, r2 ; r0 = r1 + r2
 ## 접미사
 
 ```
-EQ	: Z Set				                equal
-NE	: Z Clear			                not equal
-GE	: N equal V			              greater or equal
-LT	: N not equal V		            less than
-GT	: Z Clear and (N equal V)   	greater than
-LE	: Z Set or (N not equal V)  	less than or equal
+EQ	: Z Set	-> equal
+NE	: Z Clear -> not equal
+GE	: N equal V -> greater or equal
+LT	: N not equal V	-> less than
+GT	: Z Clear and (N equal V) -> greater than
+LE	: Z Set or (N not equal V) -> less than or equal
 S	  : Execution Instruction and CPSR Register Setting
 
 ex) ADDEQ r0, r1, r2 ; if(ZF) r0 = r1 + r2 -> if(r0 == r1+r2){ }
