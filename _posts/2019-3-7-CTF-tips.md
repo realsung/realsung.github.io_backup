@@ -142,6 +142,12 @@ curl ADDRESS -H 'header: header' --data 'data=data'
 
 <br />
 
+> Magic hash
+
+[Link](https://www.whitehatsec.com/blog/magic-hashes/)
+
+<br />
+
 > LFI & RFI
 
 ```
