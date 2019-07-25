@@ -89,13 +89,16 @@ ex) ADDEQ r0, r1, r2 ; if(ZF) r0 = r1 + r2 -> if(r0 == r1+r2){ }
 6) 에필로그(원래있던 곳으로 복귀)에 스택에서 r4 - r11 을 꺼내고 r15(프로그램 카운터)에서 리턴어드레스(복귀주소)를 꺼낸다.
 ```
 
+<br />
 
+## 명령어
 
-```
+```assembly
 산술 연산 
 ADD r0, r1, r2 ; r0 = r1 + r2
 SUB r0, r1, r2 ; r0 = r1 - r2
 MUL r0, r1, r2 ; r0 = r1 * r2
+
 [예제]
 SUBNE r1, r2, r3 ; if(!ZF) r1 = r2 - r3
 MULEQ r1, r2, r3 ; if(ZF) r1 = r2 * r3
@@ -104,6 +107,7 @@ MULEQ r1, r2, r3 ; if(ZF) r1 = r2 * r3
 - 비교 연산 결과는 CPSR의 플래그 설정
 CMP r0, r1 ; r0 - r1 
 TST r0, r1 ; r0 & r2
+
 [예제]
 CMP r0 #10 ; r0이 10이면 Zero Flag 0으로 세팅
 
@@ -112,6 +116,7 @@ CMP r0 #10 ; r0이 10이면 Zero Flag 0으로 세팅
 AND r0 r1 ; r0 & r1
 EOR r0 r1 ; r0 ^ r1
 ORR r0 r1 ; r0 | r1
+
 [예제]
 AND r0, r1, r2 ; r0 = r1 & r2
 EORNE r0, r1, r2 ; if(!ZF) r0 = r1 ^ r2
@@ -121,10 +126,12 @@ EORGT r0, r1, r2 ; Greater than r0 = r1 ^ r2
 - 메모리 접근 불가
 MOV r0 r1; r0 <- r1
 MVN r0 r1; r0 <~ ~r1
+
 - 메모리 접근 가능
 * LDR과 STR은 값을 넣는 오퍼랜드 방향이 반대임
 LDR r0 r1; r0 = r1(Memory)
 STR r0 r1; r1(Memory) = r0
+
 [예제]
 MOVEQS r0, r1, LSR #3 ; if(ZF)r0 = (r1 >> 3); CPSR
 LDRB r0, [r1], LSL # 2 ; r0 = *(Byte*)r1 << 2
@@ -137,6 +144,7 @@ STRH r0, [r1] ; *(Half Word*)r1 = r0
 주소 분기
 B operand1 ; Jump operand1
 BL operand1, LR ; operand1 함수 호출 LR은 리턴 주소 저장
+
 [예제]
 BL _printf ; printf 함수 호출
 BL sub_404040 ; sub_404040 함수 호출
@@ -146,10 +154,25 @@ BEQ success ; 제로 플래그 세팅되어 있으면 success로 분기
 쉬프트
 LSL ; 왼쪽으로 쉬프트, 빈자리 0
 LSR ; 오른쪽으로 쉬프트, 빈자리 0
+
 [예제]
 MOV r0, r1, LSL #2 ; r0 = r1 << 2
 ADD r0, r1, r2, LSL #3 ; r0 = r1 + (r2 << 3)
 EOREQ r0, r1, r2, LSR r4 ; if(ZF) r0 = r1 ^ (r2 >> r4)
 AND r0, r1, r2 LSR r3 ; r0 = r1 & (r2 >> r3)
 ```
+
+<br />
+
+## analysis
+
+```
+arm-linux-gnueabi-gcc a.c -o a : ARM Cross Complie
+
+qemu-arm ./a : a File Execute 
+```
+
+[* 실행 오류시 참고 *](https://stackoverflow.com/questions/16158994/how-to-solve-error-while-loading-shared-libraries-when-trying-to-run-an-arm-bi)
+
+
 
