@@ -27,6 +27,8 @@ R14(LR) : 링크 레지스터 : 서브루틴 후에 돌아갈 리턴 주소 저�
 R15(PC) : 프로그램 카운터 : 현재 fetch되고 있는 명령어의 주소 - 따라서 현재 실행되는 명령어의 다음다음 주소
 ```
 
+![](https://user-images.githubusercontent.com/32904385/61888031-bff6d000-af3d-11e9-9044-da6ffca518fb.png)
+
 <br />
 
 ## CSPR Register
@@ -100,10 +102,12 @@ ex) ADDEQ r0, r1, r2 ; if(ZF) r0 = r1 + r2 -> if(r0 == r1+r2){ }
 ADD r0, r1, r2 ; r0 = r1 + r2
 SUB r0, r1, r2 ; r0 = r1 - r2
 MUL r0, r1, r2 ; r0 = r1 * r2
-
+UMULL r0, r1, r2, r3 ; 부호가 없는 곱하기 r2 * r3 해서 하위 32비트를 r0에, 상위 32비트를 r1에 저장
+SMULL r0, r1, r2, r3 ; r2와 r3의 값을 2의 보수 부호 있는 정수로 해석하고 둘을 곱하고 하위 32비트를 r0, 상위 32비트를 r1에 저장
 [예제]
 SUBNE r1, r2, r3 ; if(!ZF) r1 = r2 - r3
 MULEQ r1, r2, r3 ; if(ZF) r1 = r2 * r3
+
 
 비교 연산 (<Operation>{<cond>} Rn, Op2)
 - 비교 연산 결과는 CPSR의 플래그 설정
