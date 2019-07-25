@@ -11,6 +11,8 @@ sitemap :
 
 ARM Reversing 문제 풀기 위해 좀 정리하려고 한다.
 
+[참고 : Reference](http://infocenter.arm.com/help/index.jsp)
+
 <br />
 
 ## Register
@@ -94,7 +96,7 @@ ex) ADDEQ r0, r1, r2 ; if(ZF) r0 = r1 + r2 -> if(r0 == r1+r2){ }
 ## 명령어
 
 ```assembly
-산술 연산 
+산술 연산 (<Operation>{<cond>}{S} Rd, Rn, Op2) 
 ADD r0, r1, r2 ; r0 = r1 + r2
 SUB r0, r1, r2 ; r0 = r1 - r2
 MUL r0, r1, r2 ; r0 = r1 * r2
@@ -103,7 +105,7 @@ MUL r0, r1, r2 ; r0 = r1 * r2
 SUBNE r1, r2, r3 ; if(!ZF) r1 = r2 - r3
 MULEQ r1, r2, r3 ; if(ZF) r1 = r2 * r3
 
-비교 연산
+비교 연산 (<Operation>{<cond>} Rn, Op2)
 - 비교 연산 결과는 CPSR의 플래그 설정
 CMP r0, r1 ; r0 - r1 
 TST r0, r1 ; r0 & r2
@@ -112,7 +114,7 @@ TST r0, r1 ; r0 & r2
 CMP r0 #10 ; r0이 10이면 Zero Flag 0으로 세팅
 
 
-논리 연산
+논리 연산 (<Operation>{<cond>}{S} Rd, Rn, Op2)
 AND r0 r1 ; r0 & r1
 EOR r0 r1 ; r0 ^ r1
 ORR r0 r1 ; r0 | r1
@@ -122,12 +124,12 @@ AND r0, r1, r2 ; r0 = r1 & r2
 EORNE r0, r1, r2 ; if(!ZF) r0 = r1 ^ r2
 EORGT r0, r1, r2 ; Greater than r0 = r1 ^ r2
 
-데이터 이동
-- 메모리 접근 불가
+데이터 이동 
+- 메모리 접근 불가 (<Operation>{<cond>}{S} Rd, Op2)
 MOV r0 r1; r0 <- r1
 MVN r0 r1; r0 <~ ~r1
 
-- 메모리 접근 가능
+- 메모리 접근 가능 (<Operation>{<cond>}{B, H}{S} Rn, Op2)
 * LDR과 STR은 값을 넣는 오퍼랜드 방향이 반대임
 LDR r0 r1; r0 = r1(Memory)
 STR r0 r1; r1(Memory) = r0
@@ -136,12 +138,14 @@ STR r0 r1; r1(Memory) = r0
 MOVEQS r0, r1, LSR #3 ; if(ZF)r0 = (r1 >> 3); CPSR
 LDRB r0, [r1], LSL # 2 ; r0 = *(Byte*)r1 << 2
 LDR r0, [r1] ; r0 = *r1
-LDR r0, 0x12345678 ; r0 = *0x12345678
+LDR r0, 0xdeadbeef ; r0 = *0xdeadbeef
 STR r0, [r1, #4] ; *(r1+4) = r0
+STR r0, [r1], #4 ; *(r1) = r0 그리고 r1 += 4
 LDRB r0, [r1, r2] ; r0 = *(Byete*)(r1+r2)
 STRH r0, [r1] ; *(Half Word*)r1 = r0
 
-주소 분기
+
+주소 분기 (<Operation> {<cond>}{S} Label(function))
 B operand1 ; Jump operand1
 BL operand1, LR ; operand1 함수 호출 LR은 리턴 주소 저장
 
@@ -151,9 +155,11 @@ BL sub_404040 ; sub_404040 함수 호출
 B aaaa ; aaaa로 분기 
 BEQ success ; 제로 플래그 세팅되어 있으면 success로 분기
 
-쉬프트
+베럴 쉬프트 (<Operation> {<cond>}{S} Rd, Rn, Op2, {<Barrel>} Shift)
 LSL ; 왼쪽으로 쉬프트, 빈자리 0
 LSR ; 오른쪽으로 쉬프트, 빈자리 0
+ASL ; 왼쪽으로 쉬프트, 빈자리 부호
+ASR; 오른쪽으로 쉬프트, 빈자리 부호
 
 [예제]
 MOV r0, r1, LSL #2 ; r0 = r1 << 2
@@ -164,15 +170,26 @@ AND r0, r1, r2 LSR r3 ; r0 = r1 & (r2 >> r3)
 
 <br />
 
-## analysis
+## Analysis Setting
 
-```
-arm-linux-gnueabi-gcc a.c -o a : ARM Cross Complie
+`arm-linux-gnueabi-gcc a.c -o a` : ARM Cross Compile
 
-qemu-arm ./a : a File Execute 
-```
+`qemu-arm ./a` : File Execute
+
+`qemu-arm-static -L /usr/arm-linux-gnueabihf ./a` : File Execute
+
+### GDB
+
+`qemu-arm-static -L /usr/arm-linux-gnueabi -g 1234 ./analysis1` : terminal1
+
+`gdb-multiarch -q` : terminal2 
+
+`target remote localhost:1234` : terminal2
+
+<br />
+
+[* ARM Setting *](https://zer0day.tistory.com/356)
 
 [* 실행 오류시 참고 *](https://stackoverflow.com/questions/16158994/how-to-solve-error-while-loading-shared-libraries-when-trying-to-run-an-arm-bi)
 
-
-
+<br />
