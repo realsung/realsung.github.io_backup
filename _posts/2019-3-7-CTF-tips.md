@@ -236,7 +236,7 @@ FRONT %00 INSERT -> 뒤에 문자 필터링 처리 안됨
 replace, replaceAll, str_replace
 
 ```php
-'admin' Filtering -> 'adadminmin' 'admadminin' 'admdmiadmdmiinin'
+'admin' Filtering -> 'adadminmin' 'adadmimin' 'admadminin' 'admdmiadmdmiinin'
 ```
 
 <br />
