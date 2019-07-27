@@ -112,6 +112,19 @@ libc.rand()
 
 <br />
 
+> BruteForce
+
+이런식으로 리스트의 모든 조합의 경우를 구할 수 있다. 
+
+```python
+from itertools import permutations
+a=[1,2,3]
+table = permutations(a)
+# 만약 2개씩 짝 지을거면 permutations(a,2)
+for i in table:
+  print list(i)
+```
+
 # Web Tips
 
 > Use python requests
