@@ -145,9 +145,14 @@ main:
 	@ args = 0, pretend = 0, frame = 8
 	@ frame_needed = 1, uses_anonymous_args = 0
 	push	{fp, lr}
+	lr fp 순으로 stack에 값을 넣는다. 함수 프롤로그 부분
 	add	fp, sp, #4
+	fp
 	sub	sp, sp, #8
+	sp -= 8이라고 볼 수 있다. 
+	스택 사용 공간을 할당하는듯 하다.
 	ldr	r0, .L5
+	*(r0) = .L5
 	bl	srand
 	bl	rand
 	mov	r2, r0
@@ -161,10 +166,15 @@ main:
 	add	r3, r3, r1
 	lsl	r3, r3, #1
 	sub	r3, r2, r3
+	r3 = r2 - r3
 	str	r3, [fp, #-8]
+	*(fp-8)에 r3를 넣는다
 	mov	r3, #0
+	r3 = 0으로 셋팅
 	str	r3, [fp, #-12]
+	*(fp-12)에 r3를 넣는다.
 	b	.L2
+	.L2 함수 호출한다.
 .L3:
 	ldr	r2, .L5+8
 	ldr	r3, [fp, #-12]
@@ -184,20 +194,34 @@ main:
 	str	r3, [fp, #-12]
 .L2:
 	ldr	r3, [fp, #-12]
+	r3 = *(fp-12)
 	cmp	r3, #25
+	r3가 25인지 비교하고 25면 제로 플래그 0으로 세팅
+	글자수만큼 계속 ~
 	ble	.L3
+	.L3 연산 결과가 작거나 같으면 .L3를 호출한다.
 	ldr	r1, .L5+8
 	ldr	r0, .L5+12
 	bl	printf
 	mov	r3, #0
+	r3에 0을 넣는다.
 	mov	r0, r3
+	r0에도 0을 넣는다.
+	리턴 값에 0을 넣은 것이다. return 0; 해준듯 하다.
 	sub	sp, fp, #4
 	@ sp needed
 	pop	{fp, pc}
-
+	함수 프롤로그 부분인듯하다.
 ```
 
 
+
+```python
+a="]cX^r@VC`b*V+idVk_+eVD(gjt\000"
+print ''.join(chr(ord(i)+9) for i in a)
+```
+
+**FLAG : `flag{I_Lik3_4rm_th4n_M1ps}`**
 
 <br />
 
