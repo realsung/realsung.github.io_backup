@@ -4,6 +4,7 @@ title: Duelist Crackme
 author: "Realsung"
 comments: true
 featured: true
+published: false
 sitemap :
   changefreq : Duelist Crackme
   priority : 1.0

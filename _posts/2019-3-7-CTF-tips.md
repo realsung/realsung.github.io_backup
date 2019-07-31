@@ -157,6 +157,14 @@ curl ADDRESS -H 'header: header' --data 'data=data'
 
 > Magic hash
 
+```php
+"0e1354" == "0e87453" // true
+"0" == "0e7124511451155" //true
+"0" == md5("240610708") // true
+"0" == sha1("w9KASOk6Ikap") // true
+md5("QLTHNDT") == md5("QNKCDZO") // true
+```
+
 [Link](https://www.whitehatsec.com/blog/magic-hashes/)
 
 <br />
