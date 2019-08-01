@@ -13,143 +13,143 @@ sitemap :
 
 ```c#
 for (int i = 0; i < 16; i++)
-			{
-				if (this.key.ToCharArray()[i] < ' ' || this.key.ToCharArray()[i] > '\u007f')
-				{
-					this.cnt++;
-					break;
-				}
-				if (i == 6)
-				{
-					this.num1 = (int)this.key.ToCharArray()[i];
-					this.num2 = (int)this.key.ToCharArray()[i + 10];
-					this.num3 = (int)this.key.ToCharArray()[i + 11];
-					this.temp1 = (this.num2 >> 2 ^ this.num3);
-					this.temp2 = (this.num3 >> 2 ^ this.num1);
-					this.temp3 = (this.num2 >> 2 ^ this.num1);
-					if (this.num1 < this.temp1 || this.num2 < this.temp2 || this.num3 < this.temp3)
-					{
-						this.cnt++;
-						break;
-					}
-				}
-				else
-				{
-					this.num1 = (int)this.key.ToCharArray()[i];
-					this.num2 = (int)(this.key.ToCharArray()[i + 1] >> 2 ^ this.key.ToCharArray()[i + 2]);
-					if (this.num1 < this.num2)
-					{
-						this.cnt++;
-						break;
-					}
-				}
-				if (i % 2 == 0 && i < 14)
-				{
-					this.num1 = (int)this.key.ToCharArray()[i];
-					this.num2 = (int)this.key.ToCharArray()[i + 2];
-					this.num3 = (int)this.key.ToCharArray()[i + 4];
-					this.num4 = (int)this.key.ToCharArray()[17 - i];
-					switch (this.tmp)
-					{
-					case 0:
-						if (this.num1 != (this.num2 ^ this.num3) + this.num4 || 94 != (this.num1 ^ this.num2 ^ this.num3))
-						{
-							this.cnt++;
-						}
-						break;
-					case 2:
-						if (this.num1 != (this.num2 ^ this.num3) - this.num4 + 5 || 32 != (this.num1 ^ this.num2 ^ this.num3))
-						{
-							this.cnt++;
-						}
-						break;
-					case 4:
-						if (this.num1 != ((this.num2 ^ this.num3) - this.num4) * 18 || 11 != (this.num1 ^ this.num2 ^ this.num3))
-						{
-							this.cnt++;
-						}
-						break;
-					case 6:
-						if (this.num1 != (this.num2 ^ this.num3) + this.num4 - 2 || 49 != (this.num1 ^ this.num2 ^ this.num3))
-						{
-							this.cnt++;
-						}
-						break;
-					case 8:
-						if (this.num1 != (this.num2 ^ this.num3 ^ this.num4) - 4 || 89 != (this.num1 ^ this.num2 ^ this.num3))
-						{
-							this.cnt++;
-						}
-						break;
-					case 10:
-						if (this.num1 != (this.num2 ^ this.num3 ^ this.num4) + 19 || 114 != (this.num1 ^ this.num2 ^ this.num3))
-						{
-							this.cnt++;
-						}
-						break;
-					case 12:
-						if (this.num1 != -((this.num2 ^ this.num3) & 2) + this.num4 || 69 != (this.num1 ^ this.num2 ^ this.num3))
-						{
-							this.cnt++;
-						}
-						break;
-					}
-					this.tmp++;
-				}
-				else if (i % 2 != 0 && i < 14)
-				{
-					this.num1 = (int)this.key.ToCharArray()[i];
-					this.num2 = (int)this.key.ToCharArray()[i + 2];
-					this.num3 = (int)this.key.ToCharArray()[i + 4];
-					this.num4 = (int)this.key.ToCharArray()[17 - i];
-					switch (this.tmp)
-					{
-					case 1:
-						if (102 != (this.num1 ^ this.num2 ^ this.num3))
-						{
-							this.cnt++;
-						}
-						break;
-					case 3:
-						if (74 != (this.num1 ^ this.num2 ^ this.num3))
-						{
-							this.cnt++;
-						}
-						break;
-					case 5:
-						if (107 != (this.num1 ^ this.num2 ^ this.num3))
-						{
-							this.cnt++;
-						}
-						break;
-					case 7:
-						if (57 != (this.num1 ^ this.num2 ^ this.num3))
-						{
-							this.cnt++;
-						}
-						break;
-					case 9:
-						if (89 != (this.num1 ^ this.num2 ^ this.num3))
-						{
-							this.cnt++;
-						}
-						break;
-					case 11:
-						if (41 != (this.num1 ^ this.num2 ^ this.num3))
-						{
-							this.cnt++;
-						}
-						break;
-					case 13:
-						if (40 != (this.num1 ^ this.num2 ^ this.num3))
-						{
-							this.cnt++;
-						}
-						break;
-					}
-					this.tmp++;
-				}
-			}
+  {
+    if (this.key.ToCharArray()[i] < ' ' || this.key.ToCharArray()[i] > '\u007f')
+    {
+      this.cnt++;
+      break;
+    }
+    if (i == 6)
+    {
+      this.num1 = (int)this.key.ToCharArray()[i];
+      this.num2 = (int)this.key.ToCharArray()[i + 10];
+      this.num3 = (int)this.key.ToCharArray()[i + 11];
+      this.temp1 = (this.num2 >> 2 ^ this.num3);
+      this.temp2 = (this.num3 >> 2 ^ this.num1);
+      this.temp3 = (this.num2 >> 2 ^ this.num1);
+      if (this.num1 < this.temp1 || this.num2 < this.temp2 || this.num3 < this.temp3)
+      {
+        this.cnt++;
+        break;
+      }
+    }
+    else
+    {
+      this.num1 = (int)this.key.ToCharArray()[i];
+      this.num2 = (int)(this.key.ToCharArray()[i + 1] >> 2 ^ this.key.ToCharArray()[i + 2]);
+      if (this.num1 < this.num2)
+      {
+        this.cnt++;
+        break;
+      }
+    }
+    if (i % 2 == 0 && i < 14)
+    {
+      this.num1 = (int)this.key.ToCharArray()[i];
+      this.num2 = (int)this.key.ToCharArray()[i + 2];
+      this.num3 = (int)this.key.ToCharArray()[i + 4];
+      this.num4 = (int)this.key.ToCharArray()[17 - i];
+      switch (this.tmp)
+      {
+      case 0:
+        if (this.num1 != (this.num2 ^ this.num3) + this.num4 || 94 != (this.num1 ^ this.num2 ^ this.num3))
+        {
+          this.cnt++;
+        }
+        break;
+      case 2:
+        if (this.num1 != (this.num2 ^ this.num3) - this.num4 + 5 || 32 != (this.num1 ^ this.num2 ^ this.num3))
+        {
+          this.cnt++;
+        }
+        break;
+      case 4:
+        if (this.num1 != ((this.num2 ^ this.num3) - this.num4) * 18 || 11 != (this.num1 ^ this.num2 ^ this.num3))
+        {
+          this.cnt++;
+        }
+        break;
+      case 6:
+        if (this.num1 != (this.num2 ^ this.num3) + this.num4 - 2 || 49 != (this.num1 ^ this.num2 ^ this.num3))
+        {
+          this.cnt++;
+        }
+        break;
+      case 8:
+        if (this.num1 != (this.num2 ^ this.num3 ^ this.num4) - 4 || 89 != (this.num1 ^ this.num2 ^ this.num3))
+        {
+          this.cnt++;
+        }
+        break;
+      case 10:
+        if (this.num1 != (this.num2 ^ this.num3 ^ this.num4) + 19 || 114 != (this.num1 ^ this.num2 ^ this.num3))
+        {
+          this.cnt++;
+        }
+        break;
+      case 12:
+        if (this.num1 != -((this.num2 ^ this.num3) & 2) + this.num4 || 69 != (this.num1 ^ this.num2 ^ this.num3))
+        {
+          this.cnt++;
+        }
+        break;
+      }
+      this.tmp++;
+    }
+    else if (i % 2 != 0 && i < 14)
+    {
+      this.num1 = (int)this.key.ToCharArray()[i];
+      this.num2 = (int)this.key.ToCharArray()[i + 2];
+      this.num3 = (int)this.key.ToCharArray()[i + 4];
+      this.num4 = (int)this.key.ToCharArray()[17 - i];
+      switch (this.tmp)
+      {
+      case 1:
+        if (102 != (this.num1 ^ this.num2 ^ this.num3))
+        {
+          this.cnt++;
+        }
+        break;
+      case 3:
+        if (74 != (this.num1 ^ this.num2 ^ this.num3))
+        {
+          this.cnt++;
+        }
+        break;
+      case 5:
+        if (107 != (this.num1 ^ this.num2 ^ this.num3))
+        {
+          this.cnt++;
+        }
+        break;
+      case 7:
+        if (57 != (this.num1 ^ this.num2 ^ this.num3))
+        {
+          this.cnt++;
+        }
+        break;
+      case 9:
+        if (89 != (this.num1 ^ this.num2 ^ this.num3))
+        {
+          this.cnt++;
+        }
+        break;
+      case 11:
+        if (41 != (this.num1 ^ this.num2 ^ this.num3))
+        {
+          this.cnt++;
+        }
+        break;
+      case 13:
+        if (40 != (this.num1 ^ this.num2 ^ this.num3))
+        {
+          this.cnt++;
+        }
+        break;
+      }
+      this.tmp++;
+    }
+  }
 ```
 
 플래그의 인덱스 6번째는 쉬프트 연산을 해주고 6 제외한 나머지 인덱스도 쉬프트와 xor연산을 해준다.
