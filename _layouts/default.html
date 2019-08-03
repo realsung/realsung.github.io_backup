@@ -4,11 +4,13 @@
   {% include head.html %}
 
   <body>
-    <ins class="kakao_ad_area" style="display:none;" 
-     data-ad-unit    = "DAN-vbhffv5pop4o" 
-     data-ad-width   = "728" 
-     data-ad-height  = "90"></ins> 
-    <script type="text/javascript" src="//t1.daumcdn.net/adfit/static/ad.min.js" async></script>
+    <div id="wrapper">
+      <ins class="kakao_ad_area" style="display:none;" 
+       data-ad-unit    = "DAN-vbhffv5pop4o" 
+       data-ad-width   = "728" 
+       data-ad-height  = "90"></ins> 
+      <script type="text/javascript" src="//t1.daumcdn.net/adfit/static/ad.min.js" async></script>
+    </div>
     {% include navigation.html %}
     <main>
       {{ content }}
