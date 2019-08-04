@@ -15,7 +15,7 @@ sitemap :
 
 ### J._.n3utr0n
 
-` process hallow ` 기법을 사용했다고 한다.
+` process hallow ` 기법을 사용했다.
 
 아직 좀 더 분석해야 하는 문제이다. `drop.exe` 파일을 드랍한 다음 `svchost.exe` 프로세스를 생성하고 이 프로세스에 drop.exe의 내용을 삽입하고 삭제한다.
 
@@ -132,6 +132,72 @@ int __cdecl main(int argc, const char **argv, const char **envp)
 }
 ```
 
+Ollydbg를 이용해서 마지막에 `drop.exe` 파일을 쓰고 이후에 삭제하는 부분을 코드패치해서 삭제 안되게 해서 C 드라이브 밑에 `drop.exe` 파일이 생성되게 하면 된다.
+
+![](https://user-images.githubusercontent.com/32904385/62423622-c3d4e000-b6fd-11e9-8470-ee1c34364138.png)
+
+여기를 보면 `svchost.exe` 프로세스에서 drop.exe 파일을 생성하고 그 파일을 쓰고 마지막에 삭제해주는데 삭제해주는 부분에서 삭제파일 이름을 NOP 패치해주면 파일이 삭제되지 않을 것이다.
+
+![](https://user-images.githubusercontent.com/32904385/62423621-c33c4980-b6fd-11e9-8584-ba8888284e14.png)
+
+이후 디버깅해서 실행하면 C 드라이브에 drop.exe 파일이 생성됐을 것이다.
+
+그리고 생성된 `drop.exe` 파일을 보면 이렇게 되어있는데 아래처럼 그냥 v3 긁어와서 플래그 출력하면 플래그가 안나온다.
+
+```c
+int __cdecl __noreturn main(int argc, const char **argv, const char **envp)
+{
+  char v3; // [esp+8h] [ebp-24h]
+  int v4; // [esp+9h] [ebp-23h]
+  int v5; // [esp+Dh] [ebp-1Fh]
+  int v6; // [esp+11h] [ebp-1Bh]
+  int v7; // [esp+15h] [ebp-17h]
+  int v8; // [esp+19h] [ebp-13h]
+  int v9; // [esp+1Dh] [ebp-Fh]
+  int v10; // [esp+21h] [ebp-Bh]
+  __int16 v11; // [esp+25h] [ebp-7h]
+  char v12; // [esp+27h] [ebp-5h]
+
+  v3 = 246;
+  v4 = 3532841874;
+  v5 = 3469265295;
+  v6 = 3667710604;
+  v7 = 2631654864;
+  v8 = 3654589574;
+  v9 = 2631127248;
+  v10 = 3503215563;
+  v11 = 40408;
+  v12 = 0;
+  sub_401040("flag is : %s\n", &v3);
+  exit(1);
+}
+```
+
+`sub_401080` 함수를 보면 실제 플래그 복호화 루틴이 나온다.
+
+이 함수를 보면 ~*(v3+i) 값과 0x43과 xor연산해준다. 
+
+```c
+int __cdecl sub_401080(int a1)
+{
+  signed int i; // [esp+4h] [ebp-4h]
+
+  for ( i = 0; i < 31; ++i )
+    *(i + a1) = ~*(i + a1) ^ 0x43;
+  return sub_401040("flag is : %s\n", a1);
+}
+```
+
+그러면 이제 역연산을 짜면 되겠다.
+
+```python
+table = [0xf6,0x92,0xe3,0x92,0xd2,0x8f,0xc9,0xc8,0xce,0x8c,0xd2,0x9c,0xda,0xd0,0xdd,0xdb,0x9c,0x86,0x9c,0xd4,0xd9,0xd0,0xd0,0xd3,0x9c,0xcb,0xd3,0xce,0xd0,0xd8,0x9d]
+#print ''.join(chr(255-x^0x43) for x in table)
+print ''.join(chr((~x^0x43) & 255) for x in table)
+```
+
+**FLAG : `J._.n3utr0n flag : hello world!`**
+
 <br />
 
 ### babyarm
@@ -213,8 +279,6 @@ main:
 	pop	{fp, pc}
 	함수 프롤로그 부분인듯하다.
 ```
-
-
 
 ```python
 a="]cX^r@VC`b*V+idVk_+eVD(gjt\000"
