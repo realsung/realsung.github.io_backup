@@ -13,6 +13,103 @@ sitemap :
 
 # Reversing
 
+### seori
+
+C++로 만들어진 프로그램이다.
+
+```c++
+int __cdecl sub_3011E0(int a1)
+{
+  int v1; // eax
+  int v2; // eax
+  int v3; // eax
+  int v4; // eax
+  int v5; // eax
+  int v6; // eax
+  int v7; // ST0C_4
+  int v8; // eax
+  int v9; // eax
+  int v10; // eax
+  char v12; // [esp+4h] [ebp-1Ch]
+  int v13; // [esp+8h] [ebp-18h]
+  void *Dst; // [esp+14h] [ebp-Ch]
+  DWORD v15; // [esp+18h] [ebp-8h]
+  DWORD i; // [esp+1Ch] [ebp-4h]
+
+  v1 = sub_301400(std::cout, "Hi FRIEND!");
+  std::basic_ostream<char,std::char_traits<char>>::operator<<(v1, sub_301740);
+  v2 = sub_301400(std::cout, "I HAVE PRETTY CAT. DO YOU WANT TO SEE A CAT? ");
+  std::basic_ostream<char,std::char_traits<char>>::operator<<(v2, sub_301740);
+  v3 = sub_301400(std::cout, "UNFORTUNATELY THE CAT IS HIDING :( ");
+  std::basic_ostream<char,std::char_traits<char>>::operator<<(v3, sub_301740);
+  v4 = sub_301400(std::cout, "FIND MY CAT!");
+  std::basic_ostream<char,std::char_traits<char>>::operator<<(v4, sub_301740);
+  sub_3010F0();
+  v12 = sub_301080(a1);
+  hModule = LoadLibraryW(L"Seori.exe");
+  hResInfo = FindResourceW(hModule, 0x65, L"SEORI");
+  v15 = SizeofResource(hModule, hResInfo);
+  hResData = LoadResource(hModule, hResInfo);
+  dword_305380 = LockResource(hResData);
+  v13 = dword_305380;
+  Dst = malloc((v15 + 1) | -__CFADD__(v15, 1));
+  memset(Dst, 0, v15 + 1);
+  for ( i = 0; i < v15; ++i )
+    *(Dst + i) = v12 ^ *(i + v13);
+  v5 = std::basic_ostream<char,std::char_traits<char>>::operator<<(std::cout, sub_301740);
+  v6 = std::basic_ostream<char,std::char_traits<char>>::operator<<(v5, -122569430);
+  std::basic_ostream<char,std::char_traits<char>>::operator<<(v6, v7);
+  v8 = sub_301400(std::cout, "HAVE YOU SEEN MY CAT?");
+  std::basic_ostream<char,std::char_traits<char>>::operator<<(v8, sub_301740);
+  v9 = sub_301400(std::cout, "I THINK MY CAT IS REALLY CUTE.");
+  std::basic_ostream<char,std::char_traits<char>>::operator<<(v9, sub_301740);
+  v10 = sub_301400(std::cout, "I HOPE TO FIND MY CAT!");
+  std::basic_ostream<char,std::char_traits<char>>::operator<<(v10, sub_301740);
+  return 0;
+}
+```
+
+C++로 보기는건 아직 익숙치 않아서 어셈으로 보는게 훨씬 편했다.
+
+![](https://user-images.githubusercontent.com/32904385/62424765-51203080-b70e-11e9-91f5-6a8db84e84f4.png)
+
+이쪽 부분을 보게되면 ebp+var_4를 1씩 증가시키면서(증가 시키는 부분은 그래프 밑쪽에 있다..) ebp-8과 같을 때까지 밑에 연산을 한다. ebp-8 값은 `98929` 였다.
+
+![](https://user-images.githubusercontent.com/32904385/62424764-50879a00-b70e-11e9-8077-222a1c21e99b.png)
+
+동적 디버깅해서 xor 이후 [eax]에 넣는 dl의 값을 보니  `JPEG` 헤더의 값이 보였다.
+
+![](https://user-images.githubusercontent.com/32904385/62424810-15399b00-b70f-11e9-9769-5a86b41f2764.png)
+
+그러면 이 리소스들을 추출해서 파일을 쓰면 플래그가 써 있는 JPEG가 나온다.
+
+```python
+from idaapi import *
+from idautils import *
+
+value = []
+for i in range(98928):
+	value.append(hex(Byte(0x139b398+i)))
+	"""
+	value[i] = value[i].replace('0x','')
+	if len(value[i]) == 1:
+		value[i] = "0" + value[i]
+	"""
+
+f = open('flag.jpeg','wb')
+data = ''.join(chr(int(value[i],16)) for i in range(98928))
+f.write(data)
+f.close()
+```
+
+IDA Python을 이용해서 스크립트를 짜면 된다. 그러면 이미지 파일 하나가 생성된다.
+
+![](https://user-images.githubusercontent.com/32904385/62424725-bf182800-b70d-11e9-8d81-16cf5dbb9370.jpeg)
+
+**FLAG : `SeoRi's_Meow`**
+
+<br />
+
 ### J._.n3utr0n
 
 ` process hallow ` 기법을 사용했다.
@@ -419,7 +516,3 @@ Let's See the result!!!!
 그냥 파일 추출해주면 플래그가 있다.
 
 **FLAG : `Pyth0n_m4k2_2X2_B1n4ry_:D`**
-
-<br />
-
-### seori
