@@ -18,12 +18,13 @@ permalink: /about/
 - __2018.3__ : Entrance Sunrin Internet High School
 - __2018.3__ :  Join the Programming Club Unifox
 - **2018.4.5 :** Participate in Codegate 2018 Conference
-- __2018.8.7~8__ : 4th place, KYSIS CTF ($20)
+- __2018.8.7~8__ : 4th place, KYSIS CTF ($20) (Nick : 4O4N0TFoUND)
 - **2018.9.1~2 :** 1th place, 18th Hackingcamp (Team : 둘리)
 - **2018.11.8~9 :** Participate in POC(Power of Community)
 - **2018.11.30 :** 6th place, Bronze Prize, In-school Information Security Contest (Team : 웹해킹은USA해킹)
-- **2019.1.26 :** 23th place, Codegate 2019 Quals Junior
-- **2019.3.26 :** Codegate 2019 Junior Finalist
+- **2019.1.26 :** 23th place, Finalist, Codegate 2019 Quals Junior (Nick : 앙진헌띠)
+- **2019.3.26 :** Codegate 2019 Junior Finalist (Nick : 박성준)
 - **2019.3.27 :** Participate in Codegate 2018 Conference
 - **2019.5.2 :** Lecture about School hacking Contest
 - **2019.5.9** : 2th place, Silver Prize, In-school Hacking Contest (Team : **이는 16살)
+- __2019.8.9~11__ : 18th place, Finalist, Soonchunhyang Univ. Security Festival (Nick : realsung)
