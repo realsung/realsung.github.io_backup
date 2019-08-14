@@ -9,7 +9,7 @@ sitemap :
   priority : 1.0
 ---
 
-######2472팀중에 348등 5061 points로 끝냈고 22문제를 풀었다.
+2472팀중에 348등 5061 points로 끝냈고 22문제를 풀었다.
 
 ![](https://user-images.githubusercontent.com/32904385/53815727-84b32f00-3fa5-11e9-8e3a-743d37f589a9.png)
 
