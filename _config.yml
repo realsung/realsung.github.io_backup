@@ -29,6 +29,11 @@ plugins:
   - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-sitemap
+<<<<<<< HEAD
+=======
+gems:
+  - jekyll-gist
+>>>>>>> f2491f534d6585bf68a77026b2e01216b993ee32
 # - jemoji #Uncomment this to allow emoji in your post
 
 # Permalinks
