@@ -13,46 +13,46 @@ sitemap :
 
 그냥 대놓고 딕셔너리 공격하라고 나와있다.
 
-```c
-int __cdecl main(int argc, const char **argv, const char **envp)
-{
-  signed int i; // [rsp+1Ch] [rbp-64h]
-  __int64 src; // [rsp+20h] [rbp-60h]
-  int v6; // [rsp+28h] [rbp-58h]
-  __int16 v7; // [rsp+2Ch] [rbp-54h]
-  char v8; // [rsp+2Eh] [rbp-52h]
-  char dest; // [rsp+30h] [rbp-50h]
-  unsigned __int64 v10; // [rsp+68h] [rbp-18h]
-  v10 = __readfsqword(0x28u);
-  if ( argc <= 1 )
-  {
-    puts("usage ./rev50 password");
-  }
-  else
-  {
-    src = 'sedecrem';
-    v6 = 0;
-    v7 = 0;
-    v8 = 0;
-    memcpy(&dest, &src, 9uLL);
-    for ( i = 0; i <= 999; ++i )
+    int __cdecl main(int argc, const char **argv, const char **envp)
     {
-      if ( !strcmp(argv[1], (&dict)[i]) && !strcmp(&dest, (&dict)[i]) )
+      signed int i; // [rsp+1Ch] [rbp-64h]
+      __int64 src; // [rsp+20h] [rbp-60h]
+      int v6; // [rsp+28h] [rbp-58h]
+      __int16 v7; // [rsp+2Ch] [rbp-54h]
+      char v8; // [rsp+2Eh] [rbp-52h]
+      char dest; // [rsp+30h] [rbp-50h]
+      unsigned __int64 v10; // [rsp+68h] [rbp-18h]
+      v10 = __readfsqword(0x28u);
+      if ( argc <= 1 )
       {
-        puts("Good password ! ");
-        goto LABEL_10;
+        puts("usage ./rev50 password");
       }
+      else
+      {
+        src = 'sedecrem';
+        v6 = 0;
+        v7 = 0;
+        v8 = 0;
+        memcpy(&dest, &src, 9uLL);
+        for ( i = 0; i <= 999; ++i )
+        {
+          if ( !strcmp(argv[1], (&dict)[i]) && !strcmp(&dest, (&dict)[i]) )
+          {
+            puts("Good password ! ");
+            goto LABEL_10;
+          }
+        }
+        puts("Bad ! password");
+      }
+    LABEL_10:
+      puts(&byte_40252A);
+      return 0;
     }
-    puts("Bad ! password");
-  }
-LABEL_10:
-  puts(&byte_40252A);
-  return 0;
-}
-```
+
 string으로 dict 배열에 담겨져있는 딕셔너리 값들만 빼와서 txt 형태로 저장했다. 
 그리고 계속 인자값으로 넣고 반복해줬다.
-```python
+
+```c
 from pwn import *
 f = open('dict.txt','rb')
 data = f.read()
@@ -68,12 +68,16 @@ for i in range(999):
 		break
 	p.close()
 ```
+
 Easy ~
-![](https://user-images.githubusercontent.com/32904385/62966462-0f943180-be42-11e9-9770-440e4943d85e.png)
+
 **FLAG : `Bugs_Bunny{mercedes}`**
 <br />
+
 # Rev 100
+
 간단한 xor 문제이다.
+
 ```c
 int __cdecl main(int argc, const char **argv, const char **envp)
 {
@@ -98,17 +102,23 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   return 0;
 }
 ```
+
 ptrace 안티디버깅 무시하고 플래그 구할 수 있다.
 C[i] 배열에 A[i] ^ B[i]를 넣고있다. 그냥 테이블 값 가져와서 xor 연산해주면 된다.
+
 ```python
 from idaapi import *
 from idautils import *
 print ''.join(chr(Byte(0x601070+i)^Byte(0x601090+i)) for i in range(22))
 ```
+
 **FLAG : `Bugs_Bunny{X0r_1s_fun}`**
 <br />
+
 # Rev 150
+
 함수들을 다 통과하는 argv[1]을 만들면 된다.
+
 ```c
 int __cdecl main(int argc, const char **argv, const char **envp)
 {
@@ -162,7 +172,9 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   return 0;
 }
 ```
+
 방정식들의 해를 구해주면 된다.
+
 ```python
 from z3 import *
 s = Solver()
@@ -198,6 +210,8 @@ s.check()
 m = s.model()
 print ''.join(str(m.evaluate(a1[i])) for i in range(20))
 ```
-![](https://user-images.githubusercontent.com/32904385/63169952-0b9b2600-c073-11e9-98d1-682aca112338.png)
+
 **FLAG : `BugsBunny{42813724579039578812}`**
 <br />
+
+d
