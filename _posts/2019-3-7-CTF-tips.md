@@ -13,6 +13,8 @@ sitemap :
 
 ```
 file 명령어로 봤을 때 stripped 돼있고 main 함수가 안 보인다면 start로 가면 libc_start_main으로 콜하는 데 그 중에서 첫번째 인자로 들어가는 주소가 main함수이다.
+
+윈도우 바이너리 같은 경우는 start에서 2번째 호출되는 함수의 exit()의 인자로 들어가는 result 가 main이다.
 ```
 
 <br />
