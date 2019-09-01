@@ -173,7 +173,13 @@ print bytearray(i^0x10 for i in bytearray(enc))
 
 아마도 `movfuscator` 로 컴파일된 바이너리 같다. 근데 demovfuscator를 사용하려고 했는데 capstone이 자꾸 오류나서 그냥 브루트포스 돌리고 게싱해서 풀었다. 
 
-근데 다른 사람이 stace를 이용해서 풀었길래 똑같이 풀어보았다.
+근데 다른 분이 stace를 이용해서 풀었길래 똑같이 풀어보았다. 
+
+```sh
+for i in a b c d e f g h i j k l m o p q r s t u v w x y j k l m n o p q r s t u v w x y z A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 1 2 3 4 5 6 7 8 9 @ ! ; do echo -n $i\ ; echo 'HCAMP{'$i | strace ./movisfun 2>&1 | grep SIG  | wc -l;done
+```
+
+이런식으로 스크립트를 실행시키면 표준출력해주고 strace로 시스템콜 가져와서 HCAMP{ 뒤에 올 문자를 보여준다. 그러면 일일이 하나씩 대입해 시스템콜을 추적하면 알맞은 플래그를 찾을 수 있다.
 
 **FLAG : `HCAMP{M000oo00v_1s_1nterestin9}`**
 
