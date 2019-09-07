@@ -10,7 +10,7 @@ permalink: /about/
 - __School__ : Sunrin Internet High School (Seoul Republic of Korea)
 - __Contact__ : sungjun0208@naver.com
 - __Skills__ : Develop, Analysis
-- __Club__ : [Unifox](unifox.kr) 10th
+- __Club__ : [Unifox](http://unifox.kr) 10th
 - Seoul Women's University Information Security Academy 6th (2019)
 
 <h1>History</h1>
