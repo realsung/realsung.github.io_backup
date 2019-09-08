@@ -29,4 +29,4 @@ permalink: /about/
 - **2019.5.9** : 2th place, Silver Prize, In-school Hacking Contest (Team : **이는 16살)
 - __2019.8.9~11__ : 18th place, Finalist, 17th Soonchunhyang Univ. Security Festival (Nick : realsung)
 - __2019.8.18__ : 2019 17th Soonchunhyang Univ. Junior Security Festival Finalist (Nick : realsung) 
-- __2019.9.1__ : 3th, 2019 Sunrin High-School-hacker Hacking Contest Quals (Nick : 알고리즘접고해킹하자)
+- __2019.9.1__ : 3th place, 2019 Sunrin High-School-hacker Hacking Contest Quals (Nick : 알고리즘접고해킹하자)
