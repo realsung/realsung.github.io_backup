@@ -64,3 +64,97 @@ for i in range(39):
 **FLAG : `KosenCTF{w3lc0m3_t0_y0-k0-s0_r3v3rs1ng}`**
 
 <br />
+
+## magic function
+
+f1 f2 f3 함수에서 무슨 math 함수 이용해서 무슨 연산들을 해준다. 
+
+```c
+int __cdecl main(int argc, const char **argv, const char **envp)
+{
+  char v3; // bl
+  char v4; // bl
+  char v5; // bl
+  int result; // eax
+  const char *v7; // [rsp+10h] [rbp-20h]
+  signed int v8; // [rsp+1Ch] [rbp-14h]
+
+  if ( argc <= 1 )
+    goto LABEL_14;
+  v8 = 0;
+  v7 = argv[1];
+  while ( *v7 )
+  {
+    if ( v8 > 7 )
+    {
+      if ( v8 > 15 )
+      {
+        v5 = *v7;
+        if ( v5 != f3(v8 - 16) )
+          goto LABEL_14;
+      }
+      else
+      {
+        v4 = *v7;
+        if ( v4 != f2(v8 - 8) )
+          goto LABEL_14;
+      }
+    }
+    else
+    {
+      v3 = *v7;
+      if ( v3 != f1(v8) )
+        goto LABEL_14;
+    }
+    ++v7;
+    ++v8;
+  }
+  if ( v8 != 24 )
+  {
+LABEL_14:
+    puts("NG");
+    result = 1;
+  }
+  else
+  {
+    puts("OK");
+    result = 0;
+  }
+  return result;
+}
+```
+
+마지막에 그냥 goto LABEL_14; 로 안가게 해주면 된다. 어셈으로 보게 되면 함수 호출 다음 줄에 cmp가 있는데 여기에서 bl,al를 비교하는데 bl은 우리가 입력한 값이고 al는 여기서 어떠한 연산을 한 값이다. 
+
+그래서 그냥 al에 저장된 값을 계속 가져오고 bl는 set으로 al과 똑같이 맞춰주면서 24번 반복하면 된다.
+
+```python
+import gdb
+
+gdb.execute('file chall')
+print(gdb.execute('disas main',to_string=True))
+
+gdb.execute('b * 0x000000000040080b') # main+70  cmp    bl,al
+gdb.execute('b * 0x000000000040082b') # main+102 cmp    bl,al
+gdb.execute('b * 0x0000000000400845') # main+128 cmp    bl,al
+
+pay = 'A'*24
+gdb.execute('r ' + pay,to_string=True)
+
+flag = ''
+
+for i in range(24):
+	al = gdb.execute('p $al',to_string=True).split(' ')[2]
+	flag += chr(int(al,16))
+	print(flag)
+	gdb.execute('set $bl =' + al,to_string=True)
+	gdb.execute('c',to_string=True)
+
+gdb.execute('q',to_string=True)
+```
+
+![](https://user-images.githubusercontent.com/32904385/64585999-c0f09d80-d3d5-11e9-98fb-9267edf38d64.png)
+
+**FLAG : `KosenCTF{fl4ggy_p0lyn0m}`**
+
+<br />
