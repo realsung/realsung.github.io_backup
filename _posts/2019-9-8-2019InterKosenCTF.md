@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2019 InterKosen CTF
+title: 2019 InterKosen CTF Writeup
 author: "Realsung"
 comments: true
 featured: true

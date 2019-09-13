@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2016 RC3 CTF Reversing
+title: 2016 RC3 CTF Reversing Writeup
 author: "Realsung"
 comments: true
 featured: true

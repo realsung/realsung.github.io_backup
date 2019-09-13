@@ -1,6 +1,6 @@
 ---
 layout: post
-title: White Hacker League Archon
+title: White Hacker League Archon Writeup
 author: "Realsung"
 comments: true
 featured: true

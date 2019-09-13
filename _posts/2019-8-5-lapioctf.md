@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Lapio CTF Reversing
+title: Lapio CTF Reversing Writeup
 author: "Realsung"
 published: false
 comments: true

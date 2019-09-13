@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Duelist Crackme
+title: Duelist Crackme Writeup
 author: "Realsung"
 comments: true
 featured: true

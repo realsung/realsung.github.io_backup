@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2019 20th Hackingcamp CTF
+title: 2019 20th Hackingcamp CTF Writeup
 author: "Realsung"
 comments: true
 featured: true
