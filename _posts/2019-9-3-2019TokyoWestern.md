@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2019 TokyoWesterns CTF 5th Easy Crack Me Writeup
+title: 2019 TokyoWesterns CTF 5th Easy Crack Me
 author: "Realsung"
 comments: true
 featured: true
