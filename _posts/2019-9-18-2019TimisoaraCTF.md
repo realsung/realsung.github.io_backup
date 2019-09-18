@@ -4,6 +4,7 @@ title: 2019 Timisoara CTF Quals Writeup
 author: "Realsung"
 comments: true
 featured: true
+published: false
 sitemap :
   changefreq : 2019 timictf
   priority : 1.0
@@ -747,9 +748,7 @@ $
 [*] Interrupted
 ```
 
-```
-Server
-```
+`server`
 
 ```bash
 root@8055cfbd987a:~# nc -lvp 1234
@@ -1774,6 +1773,79 @@ decrypt all values stored in md5.
 
 > This executable is doing MATH. Everyone hates that so it must be hard to reverse
 
+```c
+int __cdecl main(int argc, const char **argv, const char **envp)
+{
+  int result; // eax
+  unsigned __int8 v4; // [rsp+2h] [rbp-2Eh]
+  char v5; // [rsp+3h] [rbp-2Dh]
+  int v6; // [rsp+4h] [rbp-2Ch]
+  int v7; // [rsp+8h] [rbp-28h]
+  int i; // [rsp+Ch] [rbp-24h]
+  signed int j; // [rsp+10h] [rbp-20h]
+  signed int k; // [rsp+14h] [rbp-1Ch]
+  signed int l; // [rsp+18h] [rbp-18h]
+  int m; // [rsp+1Ch] [rbp-14h]
+
+  printf("Enter password: ", argv, envp);
+  scanf("%s", plaintext);
+  if ( strlen(plaintext) <= 0x100 )
+  {
+    v7 = 0;
+    v5 = 0;
+    for ( i = 0; i < strlen(plaintext); i += 3 )
+    {
+      v6 = key ^ (plaintext[i + 2] | ((plaintext[i + 1] | (plaintext[i] << 8)) << 8));
+      for ( j = 0; j <= 2; ++j )
+      {
+        if ( !plaintext[i + j] )
+          v5 = 1;
+      }
+      for ( k = 3; k >= 0; --k )
+      {
+        v4 = 0;
+        for ( l = 5; l >= 0; --l )
+        {
+          if ( v6 & (1 << (6 * k + l)) )
+            v4 |= 1 << l;
+        }
+        if ( v4 )
+        {
+          ciphertext[v7] = base64[v4];
+        }
+        else if ( v5 )
+        {
+          ciphertext[v7] = 61;
+        }
+        else
+        {
+          ciphertext[v7] = 65;
+        }
+        ++v7;
+      }
+    }
+    for ( m = 0; flag[m]; ++m )
+    {
+      if ( flag[m] != ciphertext[m] )
+      {
+        puts(no);
+        return 0;
+      }
+    }
+    puts(yes);
+    result = 0;
+  }
+  else
+  {
+    puts("Error: password too long!");
+    result = 0;
+  }
+  return result;
+}
+```
+
+do reverse math
+
 ```python
 import base64
 import struct
@@ -1788,7 +1860,7 @@ for i in range(0,len(cip),3):
 print flag
 ```
 
-do reverse math
+i did Bruteforce attack three digits. I guess first word.
 
 ```python
 # TIMCTF{I_s33_you_UnDeRsTaNd_x86}
@@ -1813,8 +1885,6 @@ for i in range(len(go_table)):
 gdb.execute('q',to_string=True)
 ```
 
-i did Bruteforce attack three digits. I guess first word.
-
 **FLAG : `TIMCTF{I_s33_you_UnDeRsTaNd_x86}`**
 
 <br />
@@ -1822,6 +1892,122 @@ i did Bruteforce attack three digits. I guess first word.
 ## Pipes (200pts)
 
 > Description : Someone said this program likes to smoke. Alot. See what's inside
+
+```c
+int __cdecl main(int argc, const char **argv, const char **envp)
+{
+  int result; // eax
+  bool v4; // al
+  unsigned __int8 buf; // [rsp+7h] [rbp-59h]
+  int v6; // [rsp+8h] [rbp-58h]
+  int j; // [rsp+Ch] [rbp-54h]
+  int i; // [rsp+10h] [rbp-50h]
+  __pid_t pid; // [rsp+14h] [rbp-4Ch]
+  char *s1; // [rsp+18h] [rbp-48h]
+  __int64 v11; // [rsp+20h] [rbp-40h]
+  __int64 v12; // [rsp+28h] [rbp-38h]
+  __int64 v13; // [rsp+30h] [rbp-30h]
+  __int64 v14; // [rsp+38h] [rbp-28h]
+  __int64 v15; // [rsp+40h] [rbp-20h]
+  __int16 v16; // [rsp+48h] [rbp-18h]
+  unsigned __int64 v17; // [rsp+58h] [rbp-8h]
+
+  v17 = __readfsqword(0x28u);
+  v11 = 7142820555239287888LL;
+  v12 = 8462115404900429676LL;
+  v13 = 7451053173976080498LL;
+  v14 = 7953753264878285413LL;
+  v15 = 2387226065748172907LL;
+  v16 = 10;
+  if ( ptrace(0, 0LL, 1LL, 0LL) == -1 )
+  {
+    std::operator<<<std::char_traits<char>>(&_bss_start, &v11);
+    result = 255;
+  }
+  else
+  {
+    std::operator<<<std::char_traits<char>>(&_bss_start, "Enter password: \n");
+    std::operator>><char,std::char_traits<char>,std::allocator<char>>(&std::cin, &input);
+    if ( pipe(pipe_1) == -1 )
+    {
+      std::operator<<<std::char_traits<char>>(&_bss_start, "Failed creating pipe!\n");
+      result = 0;
+    }
+    else if ( pipe(pipe_2) == -1 )
+    {
+      std::operator<<<std::char_traits<char>>(&_bss_start, "Failed creating pipe!\n");
+      result = 0;
+    }
+    else
+    {
+      pid = fork();
+      if ( pid == -1 )
+      {
+        std::operator<<<std::char_traits<char>>(&_bss_start, "Fork failed!\n");
+        result = 0;
+      }
+      else if ( pid )
+      {
+        s1 = (char *)std::__cxx11::basic_string<char,std::char_traits<char>,std::allocator<char>>::c_str(&input);
+        v4 = std::__cxx11::basic_string<char,std::char_traits<char>,std::allocator<char>>::size(&input) != 48
+          || strncmp(s1, "TIMCTF{", 7uLL)
+          || s1[47] != 125;
+        if ( v4 )
+        {
+          std::operator<<<std::char_traits<char>>(&_bss_start, "NOOOOOOOOOOO\n");
+          result = 0;
+        }
+        else
+        {
+          for ( i = 7; i <= 46; ++i )
+          {
+            write(dword_202324, &s1[i], 1uLL);
+            if ( read(pipe_2[0], &v6, 4uLL) <= 0 )
+            {
+              std::operator<<<std::char_traits<char>>(&_bss_start, "P: Read failed!\n");
+              return 0;
+            }
+            if ( flag[i - 7] != v6 )
+            {
+              std::operator<<<std::char_traits<char>>(&_bss_start, "NOOOOOOOOOOO\n");
+              return 0;
+            }
+          }
+          std::operator<<<std::char_traits<char>>(&_bss_start, "Yay, you got the flag!\n");
+          close(pipe_1[0]);
+          close(dword_202324);
+          close(pipe_2[0]);
+          close(fd);
+          waitpid(pid, 0LL, 1);
+          result = 0;
+        }
+      }
+      else
+      {
+        for ( j = 0; j <= 39; ++j )
+        {
+          buf = 0;
+          if ( read(pipe_1[0], &buf, 1uLL) <= 0 )
+          {
+            std::operator<<<std::char_traits<char>>(&_bss_start, "C: Read failed!\n");
+            return 0;
+          }
+          buf += 96;
+          rol(&buf, 2);
+          buf ^= 0x7Fu;
+          buf = ~buf;
+          v6 = 237 * buf;
+          write(fd, &v6, 4uLL);
+        }
+        result = 0;
+      }
+    }
+  }
+  return result;
+}
+```
+
+compare the flag characters
 
 ```assembly
 lea     rax, flag
