@@ -4,7 +4,7 @@ title: 2019 Timisoara CTF Quals Writeup
 author: "Realsung"
 comments: true
 featured: true
-published: false
+published: true
 sitemap :
   changefreq : 2019 timictf
   priority : 1.0
@@ -112,6 +112,139 @@ i found this cipher is [TEMPHIS](https://www.dafont.com/temphis.font) .
 I translated the last line and found a flag.
 
 **FLAG : `TIMCTF{TEMPHIS_IS_AWESOME}`**
+
+<br />
+
+## Password breaker (150pts)
+
+> I heard you were good at cracking passwords!
+>
+> **Hint!** What are the most common attacks on a password? Dictionary and bruteforce
+>
+> **Hint!** If it takes more than a few minutes you're doing it wrong.
+
+So I thought I had to solve the problem with a dictionary attack and brute force.
+
+I used https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt ( rockyou.txt ) for dictionary attack.
+
+And I used `zip2john` and `hashcat`.
+
+First, I find zip file's hash.
+
+```bash
+juntae@ubuntu:~/JohnTheRipper/run$ ./zip2john flag.zip 
+flag.zip/stage2.zip:$zip2$*0*3*0*9ac9ce6ee278a40d4cf411eaa648131b*fd6b*b2*78cef498d2a837ebd25d26208209f19952c77ab4c21f0d68c2fca0f766bf59341fc96a1d7939008fe56bf8668337f7916baa22389b0fc27e2cb0047c3ff05e2dde94c33fde57190fe478b52636464bf8ee32fc36860270f1b8a921236b2b46ac16f813e77992ce3344906f9da2647a1fd15cce19f70cc9b1346e300adde56b0e31508793d9dea93140262dae208c88f536a93511f4bafd3b5ccc90543f7e0c2820902e7c4499c9330ab00dcf3e0b4b8535fa*c57c8b72e78f366e2d87*$/zip2$:stage2.zip:flag.zip:flag.zip
+```
+
+And make `hash.txt`
+
+```
+$zip2$*0*3*0*9ac9ce6ee278a40d4cf411eaa648131b*fd6b*b2*78cef498d2a837ebd25d26208209f19952c77ab4c21f0d68c2fca0f766bf59341fc96a1d7939008fe56bf8668337f7916baa22389b0fc27e2cb0047c3ff05e2dde94c33fde57190fe478b52636464bf8ee32fc36860270f1b8a921236b2b46ac16f813e77992ce3344906f9da2647a1fd15cce19f70cc9b1346e300adde56b0e31508793d9dea93140262dae208c88f536a93511f4bafd3b5ccc90543f7e0c2820902e7c4499c9330ab00dcf3e0b4b8535fa*c57c8b72e78f366e2d87*$/zip2$
+```
+
+Finally, use `hashcat`. 
+
+I can get zip file's password.
+
+```bash
+Microsoft Windows [Version 10.0.17763.737]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+C:\Users\aaa\Desktop\hashcat-5.1.0\hashcat-5.1.0>hashcat64.exe -m 13600 flag_hash.txt rockyou.txt
+hashcat (v5.1.0) starting...
+
+* Device #1: WARNING! Kernel exec timeout is not disabled.
+             This may cause "CL_OUT_OF_RESOURCES" or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: GeForce GTX 960, 512/2048 MB allocatable, 8MCU
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Applicable optimizers:
+* Zero-Byte
+* Single-Hash
+* Single-Salt
+* Slow-Hash-SIMD-LOOP
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+Watchdog: Temperature abort trigger set to 90c
+
+Dictionary cache built:
+* Filename..: rockyou.txt
+* Passwords.: 14344391
+* Bytes.....: 139921497
+* Keyspace..: 14344384
+* Runtime...: 1 sec
+
+$zip2$*0*3*0*9ac9ce6ee278a40d4cf411eaa648131b*fd6b*0*78cef498d2a837ebd25d26208209f19952c77ab4c21f0d68c2fca0f766bf59341fc96a1d7939008fe56bf8668337f7916baa22389b0fc27e2cb0047c3ff05e2dde94c33fde57190fe478b52636464bf8ee32fc36860270f1b8a921236b2b46ac16f813e77992ce3344906f9da2647a1fd15cce19f70cc9b1346e300adde56b0e31508793d9dea93140262dae208c88f536a93511f4bafd3b5ccc90543f7e0c2820902e7c4499c9330ab00dcf3e0b4b8535fa*c57c8b72e78f366e2d87*$/zip2$:johncena1234
+
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: WinZip
+Hash.Target......: $zip2$*0*3*0*9ac9ce6ee278a40d4cf411eaa648131b*fd6b*.../zip2$
+Time.Started.....: Wed Sep 18 23:17:18 2019 (4 secs)
+Time.Estimated...: Wed Sep 18 23:17:22 2019 (0 secs)
+Guess.Base.......: File (rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:   266.9 kH/s (5.84ms) @ Accel:64 Loops:62 Thr:64 Vec:1
+Recovered........: 1/1 (100.00%) Digests, 1/1 (100.00%) Salts
+Progress.........: 917504/14344384 (6.40%)
+Rejected.........: 0/917504 (0.00%)
+Restore.Point....: 884736/14344384 (6.17%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:992-999
+Candidates.#1....: lennylove -> jam16
+Hardware.Mon.#1..: Temp: 54c Fan: 30% Util: 76% Core:1468MHz Mem:3004MHz Bus:16
+
+Started: Wed Sep 18 23:17:15 2019
+Stopped: Wed Sep 18 23:17:24 2019
+
+C:\Users\aaa\Desktop\hashcat-5.1.0\hashcat-5.1.0>
+```
+
+first password is `johncena1234`.
+
+The password for stage2 can also be found in the same way.
+
+Here, brute force is used.
+
+```bash
+juntae@ubuntu:~/JohnTheRipper/run$ ./zip2john stage2.zip 
+stage2.zip/flag.txt:$zip2$*0*3*0*91f5b5c56b6f9aa71f0197c3f93e42c1*a1f8*21*1e7161f9e69797bd2fd8807cf7322289965fc39ea99ad05bab85343f58b802183a*d2163b2e7e4d1d7d89c2*$/zip2$:flag.txt:stage2.zip:stage2.zip
+```
+
+Finally, Brute force it!
+
+```bash
+C:\Users\aaa\Desktop\hashcat-5.1.0\hashcat-5.1.0>hashcat64.exe -m 13600 -a 3 stage2_hash.txt a?a?a?a?
+hashcat (v5.1.0) starting...
+
+* Device #1: WARNING! Kernel exec timeout is not disabled.
+             This may cause "CL_OUT_OF_RESOURCES" or related errors.
+             To disable the timeout, see: https://hashcat.net/q/timeoutpatch
+OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: GeForce GTX 960, 512/2048 MB allocatable, 8MCU
+
+INFO: All hashes found in potfile! Use --show to display them.
+
+Started: Wed Sep 18 23:46:31 2019
+Stopped: Wed Sep 18 23:46:31 2019
+
+C:\Users\aaa\Desktop\hashcat-5.1.0\hashcat-5.1.0>hashcat64.exe -m 13600 -a 3 stage2_hash.txt a?a?a?a? --show
+$zip2$*0*3*0*91f5b5c56b6f9aa71f0197c3f93e42c1*a1f8*21*1e7161f9e69797bd2fd8807cf7322289965fc39ea99ad05bab85343f58b802183a*d2163b2e7e4d1d7d89c2*$/zip2$:bo$$
+
+C:\Users\aaa\Desktop\hashcat-5.1.0\hashcat-5.1.0>
+```
+
+Last password is `bo$$`.
+
+**FLAG : `TIMCTF{12345_is_A_bad_passw0rd}`**
 
 <br />
 
