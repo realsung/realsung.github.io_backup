@@ -180,7 +180,8 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   v22 = __readfsqword(0x28u);
   puts(" [*] Please enjoy yourself.");
   fflush(_bss_start);
-  for ( i = 0; i <= 0xB; ++i ){
+  for(i = 0; i <= 0xB; ++i )
+  {
     printf(" Input[%d] : ", i);
     fflush(_bss_start);
     argv = (&v10 + i);
@@ -191,7 +192,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
     for ( j = 0; j <= 0xB; ++j )
       *(&v10 + j) ^= 0xAu;
     v15 ^= 0x73u;
-    printf(" [+] flag {%c%c%c%c%c%c%c%c%c%c%c%c}\n", v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21);
+    printf(" [+] flag { %c%c%c%c%c%c%c%c%c%c%c%c }\n", v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21);
   }
   else
   {
