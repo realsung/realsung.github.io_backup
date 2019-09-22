@@ -3,7 +3,9 @@ layout: post
 title: 2019 제 14회 중고생정보보호올림피아드 풀이
 author: "Realsung"
 comments: true
+published: false
 featured: true
+
 sitemap :
   changefreq : 2019 
   priority : 1.0
@@ -136,7 +138,53 @@ int main(){
 }
 ```
 
-그러면 새로운 `Decrypt.exe` 파일이 생긴다.
+그러면 새로운 `Decrypt.exe` 파일이 생긴다. 
+
+```c
+int __fastcall sub_1400030F0(__int64 a1)
+{
+  __int64 v1; // rbx
+  int v2; // edi
+  int v3; // eax
+  UINT v4; // er9
+  const CHAR *v5; // r8
+  const CHAR *v6; // rdx
+
+  v1 = a1;
+  v2 = sub_14002B0D0(a1, 1000i64, 0i64, 1i64);
+  v3 = sub_14002B0D0(v1, 1001i64, 0i64, 1i64);
+  if ( (v2 - 10000) > 89999 || (v3 - 10000) > 89999 )
+  {
+    v6 = "nono! number length chack!!";
+    goto LABEL_10;
+  }
+  if ( ((v2 + v3 * (v2 - 1) - 3 * (v3 / 2)) ^ 0xAAEFEAE) != 0x1AE9AA40 )
+  {
+    v6 = "oh..no number u_u";
+LABEL_10:
+    v4 = 16;
+    v5 = "oh...";
+    return MessageBoxA(0i64, v6, v5, v4);
+  }
+  if ( (v2 - 26000) >= 1000 || (v3 - 10000) >= 1000 )
+  {
+    MessageBoxA(0i64, "Other than this number.", "Not this..", 0x30u);
+    v4 = 64;
+    v5 = "Not this..";
+    v6 = &unk_140230A40;
+  }
+  else
+  {
+    MessageBoxA(0i64, "yesyes! number!!", "OK", 0x40u);
+    v4 = 64;
+    v5 = "OK";
+    v6 = &unk_1402309D0;
+  }
+  return MessageBoxA(0i64, v6, v5, v4);
+}
+```
+
+
 
 ## Q3
 
