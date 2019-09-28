@@ -32,5 +32,5 @@ permalink: /about/
 - __2019.9.1__ : 3th place, 2019 Sunrin High-School-hacker Hacking Contest Quals (Team : 알고리즘접고해킹하자)
 - __2019.9.10__ : 7th place, Incentive Prize, School Network Establishment Competition (Team : 만육십)
 - __2019.9.14~18__ : 7th place, 2019 Timisoara CTF Quals Finalist (Team : Complex)
-- __2019.9.21__ : 7th place, Finalist, 14th Middle and High School Students Information Security Olympiad (Nick : 박성준)
+- __2019.9.21__ : 8th place, Finalist, 14th Middle and High School Students Information Security Olympiad (Nick : 박성준)
 
