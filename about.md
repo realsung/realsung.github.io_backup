@@ -50,8 +50,6 @@ permalink: /about/
 
 * **2018.4.5 :** `Participate in Codegate 2018 Conference`
 
-* __2018.3__ : ` Entrance Sunrin Internet High School`
-
 ## 2017
 
 * **2017.8** : `Gold Prize, Software Olympiad`
