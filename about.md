@@ -16,6 +16,8 @@ permalink: /about/
 <h1>History</h1>
 ## 2019
 
+* __2019.10.1__ : `1th place, Gold Prize, In-school Server Construct Contest (Team : 권우주)`
+
 * __2019.9.21__ : `8th place, Finalist, 14th Middle and High School Students Information Security Olympiad`
 
 * __2019.9.14~18__ : `7th place, 2019 Timisoara CTF Quals Finalist (Team : Complex)`
