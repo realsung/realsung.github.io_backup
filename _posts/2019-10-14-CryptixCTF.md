@@ -40,7 +40,6 @@ public abstract class AppComputActivity extends AppCompatActivity {
     return 1;
   }
 }
-
 ```
 
 그냥 간단하다. obf로 파라미터 오는 값은 플래그 값인데 그거 조건만 맞춰주면 된다.
@@ -58,6 +57,8 @@ print(flag)
 ```
 
 **FLAG : `flag{To6i4s_&_Tri5}`**
+
+<br />
 
 # The Spy
 
