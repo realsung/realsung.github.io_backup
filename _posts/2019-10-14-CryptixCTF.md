@@ -124,6 +124,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 strcmp 취약점 터진다. 배열로 삽입해서 풀면 된다.
 
+Payload : `ID=SuperUser1337&pwd[1]=1`
+
 **FLAG : `flag{Why_Juggl3_th3_Typ5}`**
 
 <br />
