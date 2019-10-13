@@ -9,6 +9,56 @@ sitemap :
   priority : 1.0
 ---
 
+# Where to run this
+
+zip파일 같은데 내부 파일보면 apk 파일이였다. 이걸 .jar파일로 바꿔주고 보면 된다.
+
+```java
+package com.example.password;
+
+import android.support.v7.app.AppCompatActivity;
+
+public abstract class AppComputActivity extends AppCompatActivity {
+  int a = 57;
+  
+  int b = 29;
+  
+  int[] key = { 
+      4817, 6356, 3107, 6014, 2993, 6584, 5444, 2195, 5444, 4817, 
+      6527, 6014, 3050 };
+  
+  int obf(String paramString) {
+    byte b1 = 0;
+    while (b1 < paramString.length()) {
+      int i = paramString.charAt(b1);
+      if (this.a * i + this.b == this.key[b1]) {
+        b1++;
+        continue;
+      } 
+      return 0;
+    } 
+    return 1;
+  }
+}
+
+```
+
+그냥 간단하다. obf로 파라미터 오는 값은 플래그 값인데 그거 조건만 맞춰주면 된다.
+
+```python
+table = [4817, 6356, 3107, 6014, 2993, 6584, 5444, 2195, 5444, 4817, 6527, 6014, 3050]
+a = 57
+b = 29
+flag = ''
+for i in table:
+	for j in range(33,128):
+		if a*j+b==i:
+			flag += chr(j)
+print(flag)
+```
+
+**FLAG : `flag{To6i4s_&_Tri5}`**
+
 # The Spy
 
 ```
