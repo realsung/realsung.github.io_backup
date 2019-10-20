@@ -16,7 +16,9 @@ permalink: /about/
 <h1>History</h1>
 ## 2019
 
-* __2019.10.19__ : `4th place, Information Security Academy Contest Quals (Solo) `
+* __2019.10.20__ : `4th place, Finalist, DSEC CTF Quals (Team : 영남TV구독과좋아요) `
+
+* __2019.10.19__ : `4th place, Finalist, Information Security Academy Contest Quals (Solo) `
 
 * __2019.10.1__ : `1th place, Gold Prize, In-school Server Construct Contest (Team : 권우주)`
 
