@@ -16,6 +16,8 @@ permalink: /about/
 <h1>History</h1>
 ## 2019
 
+* __2019.10.25__ : `Silver Prize, 14th Middle and High School Students Information Security Olympiad ($500)`
+
 * __2019.10.20__ : `3th place, Finalist, DSEC CTF Quals (Team : 영남TV구독과좋아요) `
 
 * __2019.10.19__ : `4th place, Finalist, Information Security Academy Contest Quals (Solo) `
