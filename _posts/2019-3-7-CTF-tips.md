@@ -77,6 +77,20 @@ printf("%LENGTH$08x"); -> printf("%1337$08x");
 printf("%LENGTH$n"); -> printf("%12$n");
 ```
 
+> nc tip
+
+nc로 바이너리가 주어질 때 있는데 아래처럼 바이너리 같은지 확인 가능하다.
+
+```
+$ nc 주소 > 1
+$ nc 주소 > 2
+$ nc 주소 > 3
+$ nc 주소 > 4
+$ nc 주소 > 5
+$ md5sum * 
+$ rm *
+```
+
 <br />
 
 # Python Tips
@@ -126,6 +140,14 @@ table = permutations(a)
 for i in table:
   print list(i)
 ```
+
+> ida python 
+
+```
+ifind('call') : 호출되는 함수볼 수 있음
+```
+
+<br />
 
 # Web Tips
 

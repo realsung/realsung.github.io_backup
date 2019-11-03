@@ -4,6 +4,7 @@ title: 2016 Hackcon CTF angry reverse
 author: "Realsung"
 comments: true
 featured: true
+published: false
 sitemap :
   changefreq : hackconctf
   priority : 1.0

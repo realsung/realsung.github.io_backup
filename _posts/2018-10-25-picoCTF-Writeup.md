@@ -2,6 +2,7 @@
 layout: post
 title: 2018 Pico CTF Writeup
 author: "Realsung"
+published: false
 comments: true
 featured: true
 sitemap :

@@ -3,6 +3,7 @@ layout: post
 title: 2019 InterKosen CTF Writeup
 author: "Realsung"
 comments: true
+published: false
 featured: true
 sitemap :
   changefreq : 2019 interkosenctf
