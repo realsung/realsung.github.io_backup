@@ -16,6 +16,10 @@ author: "realsung"
 <h1>History</h1>
 ## 2019
 
+* __2019.11.9__ : `2th place, Hyundai Autoever Hacking Contest ($1000)`
+
+* __2019.11.8__ : `1st place, Theori Reversing Speed Hack (Line Doll)`
+
 * __2019.10.26__ : `2th place,Information Security Academy Contest Final (Team : 볼빤간성준이) ($300, LG G PAD)`
 
 * __2019.10.25__ : `Silver Prize, 14th Middle and High School Students Information Security Olympiad Final ($500)`
