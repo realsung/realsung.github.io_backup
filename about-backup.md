@@ -16,11 +16,13 @@ author: "realsung"
 <h1>History</h1>
 ## 2019
 
+2019 poc
+
 * __2019.11.9__ : `2th place, Hyundai Autoever Hacking Contest ($1000)`
 
 * __2019.11.8__ : `1st place, Theori Reversing Speed Hack (Line Doll)`
 
-* __2019.10.26__ : `2th place,Information Security Academy Contest Final (Team : 볼빤간성준이) ($300, LG G PAD)`
+* __2019.10.26__ : `2th place,Information Security Academy Contest Final (Team : 볼빤간성준이) ($300, LG G PAD)` 교육학술정보원장상
 
 * __2019.10.25__ : `Silver Prize, 14th Middle and High School Students Information Security Olympiad Final ($500)`
 
@@ -52,7 +54,7 @@ author: "realsung"
 
 * **2019.1.26 :** `23th place, Finalist, Codegate 2019 Quals Junior (Nick : 앙진헌띠)`
 
-## 2018
+## 2018ㅅ
 
 * **2018.11.30 :** `6th place, Bronze Prize, In-school Information Security Contest (Team : 웹해킹은USA해킹)`
 
