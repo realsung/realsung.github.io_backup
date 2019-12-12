@@ -8,8 +8,8 @@ permalink: /about/
 - __Nickname__ : realsung
 - __School__ : Sunrin Internet High School (Seoul Republic of Korea)
 - __Contact__ : sungjun0208@naver.com
-
-* **Interests** : Dev, Pwn, Rev
+- __Interests__ : Dev, Pwn, Rev
+- __Team__ : Defenit
 
 <br />
 
@@ -24,6 +24,8 @@ permalink: /about/
 **- 2nd place, 특성화 고교생 화이트해커 경진대회 (1000USD)**
 
 **- 2nd place, 전국 영재원 정보보안 경진대회 (300USD + Tablet PC)**
+
+**- 5th place, holyshied CTF Junior**
 
 **- Silver prize, 제 14회 정보보호올림피아드 (500USD)**
 
